@@ -1,5 +1,8 @@
 <?php
 
+namespace pimax;
+
+
 /**
  * Class Message
  *
