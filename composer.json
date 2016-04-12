@@ -1,7 +1,17 @@
 {
   "name": "pimax/fb-messenger-php",
   "description": " Facebook Messenger Bot PHP API",
+  "homepage": "https://github.com/pimax/fb-messenger-php",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Max Pinyugin",
+      "email": "m.pinyugin@gmail.com",
+      "homepage": "http://russian-developers.com",
+      "role": "Developer"
+    }
+  ],
   "require": {
-    "php": ">=5.3.0"
+    "php": ">=5.4.0"
   }
 }
