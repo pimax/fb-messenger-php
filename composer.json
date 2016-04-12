@@ -1,0 +1,7 @@
+{
+  "name": "pimax/fb-messenger-php",
+  "description": " Facebook Messenger Bot PHP API",
+  "require": {
+    "php": ">=5.3.0"
+  }
+}
