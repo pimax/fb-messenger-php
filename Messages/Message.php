@@ -44,7 +44,9 @@ class Message
             'recipient' =>  [
                 'id' => $this->recipient
             ],
-            'message' => $this->data
+            'message' => [
+                'text' => $this->text
+            ]
         ];
     }
 }
