@@ -50,7 +50,7 @@ class StructuredMessage extends Message
         switch ($type)
         {
             case self::TYPE_BUTTON:
-                $this->title = $data['title'];
+                $this->title = $data['text'];
                 $this->buttons = $data['buttons'];
             break;
 
@@ -87,7 +87,7 @@ class StructuredMessage extends Message
         switch ($this->type)
         {
             case self::TYPE_BUTTON:
-                $result['attachment']['payload']['title'] = $this->title;
+                $result['attachment']['payload']['text'] = $this->title;
                 $result['attachment']['payload']['buttons'] = [];
 
                 foreach ($this->buttons as $btn) {
@@ -127,6 +127,11 @@ class StructuredMessage extends Message
             break;
         }
 
-        return $result;
+        return [
+            'recipient' =>  [
+                'id' => $this->recipient
+            ],
+            'message' => $result
+        ];
     }
 }

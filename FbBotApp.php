@@ -39,7 +39,7 @@ class FbBotApp
      * @param Message $message
      * @return mixed
      */
-    public function send(Message $message)
+    public function send($message)
     {
         return $this->call('messages', $message->getData());
     }
