@@ -3,16 +3,49 @@
 namespace pimax\Messages;
 
 
+/**
+ * Class MessageElement
+ *
+ * @package pimax\Messages
+ */
 class MessageElement
 {
+    /**
+     * Title
+     *
+     * @var string|null
+     */
     protected $title = null;
 
+    /**
+     * Image url
+     *
+     * @var null|string
+     */
     protected $image_url = null;
 
+    /**
+     * Subtitle
+     *
+     * @var null|string
+     */
     protected $subtitle = null;
 
+    /**
+     * Buttons
+     *
+     * @var array
+     */
     protected $buttons = [];
 
+    /**
+     * MessageElement constructor.
+     *
+     * @param $title
+     * @param $subtitle
+     * @param string $image_url
+     * @param array $buttons
+     */
     public function __construct($title, $subtitle, $image_url = '', $buttons = [])
     {
         $this->title = $title;
@@ -21,6 +54,11 @@ class MessageElement
         $this->buttons = $buttons;
     }
 
+    /**
+     * Get Element data
+     * 
+     * @return array
+     */
     public function getData()
     {
         $result = [

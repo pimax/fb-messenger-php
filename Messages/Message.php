@@ -23,7 +23,8 @@ class Message
     /**
      * Message constructor.
      *
-     * @param $data Message data
+     * @param $recipient
+     * @param $text
      */
     public function __construct($recipient, $text)
     {

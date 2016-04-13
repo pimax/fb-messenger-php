@@ -4,44 +4,103 @@ namespace pimax\Messages;
 
 /**
  * Class StructuredMessage
+ *
  * @package pimax\Messages
  */
 class StructuredMessage extends Message
 {
+    /**
+     * Structured message button type
+     */
     const TYPE_BUTTON = "button";
 
+    /**
+     * Structured message generic type
+     */
     const TYPE_GENERIC = "generic";
 
+    /**
+     * Structured message receipt type
+     */
     const TYPE_RECEIPT = "receipt";
 
+    /**
+     * @var null|string
+     */
     protected $type = null;
 
+    /**
+     * @var null|string
+     */
     protected $title = null;
 
+    /**
+     * @var null|string
+     */
     protected $subtitle = null;
 
+    /**
+     * @var array
+     */
     protected $elements = [];
 
+    /**
+     * @var array
+     */
     protected $buttons = [];
 
+    /**
+     * @var null|string
+     */
     protected $recipient_name = null;
 
+    /**
+     * @var null|integer
+     */
     protected $order_number = null;
 
+    /**
+     * @var string
+     */
     protected $currency = "USD";
 
+    /**
+     * @var null|string
+     */
     protected $payment_method = null;
 
+    /**
+     * @var null|string
+     */
     protected $order_url = null;
 
+    /**
+     * @var null|integer
+     */
     protected $timestamp = null;
 
+    /**
+     * @var array
+     */
     protected $address = [];
 
+    /**
+     * @var array
+     */
     protected $summary = [];
 
+    /**
+     * @var array
+     */
     protected $adjustments = [];
 
+    /**
+     * StructuredMessage constructor.
+     *
+     * @param $recipient
+     * @param $type
+     * @param $data
+     */
     public function __construct($recipient, $type, $data)
     {
         $this->recipient = $recipient;
@@ -73,6 +132,11 @@ class StructuredMessage extends Message
         }
     }
 
+    /**
+     * Get Data
+     *
+     * @return array
+     */
     public function getData()
     {
         $result = [

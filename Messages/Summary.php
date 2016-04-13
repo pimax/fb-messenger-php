@@ -1,23 +1,34 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pimax
- * Date: 13.04.16
- * Time: 2:45
- */
 
 namespace pimax\Messages;
 
-
+/**
+ * Class Summary
+ *
+ * @package pimax\Messages
+ */
 class Summary
 {
+    /**
+     * @var array
+     */
     protected $data = [];
 
+    /**
+     * Summary constructor.
+     *
+     * @param $data
+     */
     public function __construct($data)
     {
         $this->data = $data;
     }
 
+    /**
+     * Get Data
+     * 
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
