@@ -7,7 +7,7 @@ REQUIREMENTS
 ------------
 The minimum requirement is that your Web server supports PHP 5.4.
 
-INSTALATION
+INSTALLATION
 ------------
 
 ```
