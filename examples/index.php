@@ -57,7 +57,7 @@ if (!empty($_REQUEST['hub_mode']) && $_REQUEST['hub_mode'] == 'subscribe' && $_R
                         $bot->send(new StructuredMessage($message['sender']['id'],
                             StructuredMessage::TYPE_BUTTON,
                             [
-                                'title' => 'Choose category',
+                                'text' => 'Choose category',
                                 'buttons' => [
                                     new MessageButton(MessageButton::TYPE_POSTBACK, 'All jobs'),
                                     new MessageButton(MessageButton::TYPE_POSTBACK, 'Web Development'),
