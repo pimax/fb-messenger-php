@@ -16,4 +16,4 @@ composer require "pimax/fb-messenger-php" "dev-master"
 
 BASIC USAGE
 ------------
-See examples folder.
+See this repo - [https://github.com/pimax/fb-messenger-php-example](https://github.com/pimax/fb-messenger-php-example)
