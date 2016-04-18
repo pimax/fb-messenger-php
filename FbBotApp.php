@@ -20,7 +20,7 @@ class FbBotApp
      *
      * @var string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.6/me/';
+    protected $apiUrl = 'https://graph.facebook.com/v2.6/';
     
     /**
      * BOT username
@@ -41,7 +41,22 @@ class FbBotApp
      */
     public function send($message)
     {
-        return $this->call('messages', $message->getData());
+        return $this->call('me/messages', $message->getData());
+    }
+
+    /**
+     * Get User Profile Info
+     *
+     * @param $id
+     * @return array[first_name] First Name
+     * @return array[last_name] Last Name
+     * @return array[profile_pic] Profile Picture Url
+     */
+    public function userProfile($id)
+    {
+        return $this->call($id, [
+            'fields' => 'first_name,last_name,profile_pic'
+        ]);
     }
 
     /**
