@@ -54,9 +54,9 @@ class FbBotApp
      */
     public function userProfile($id)
     {
-        return $this->call($id, [
+        return new UserProfile($this->call($id, [
             'fields' => 'first_name,last_name,profile_pic'
-        ]);
+        ]));
     }
 
     /**
