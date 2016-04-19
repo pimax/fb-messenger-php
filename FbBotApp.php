@@ -56,7 +56,7 @@ class FbBotApp
     {
         return new UserProfile($this->call($id, [
             'fields' => 'first_name,last_name,profile_pic'
-        ]));
+        ], self::TYPE_GET));
     }
 
     /**
@@ -75,14 +75,20 @@ class FbBotApp
             'Content-Type: application/json',
         ];
 
+        if ($type == self::TYPE_GET) {
+            $url .= '?'.http_build_query($data);
+        }
+
         $process = curl_init($this->apiUrl.$url);
         curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($process, CURLOPT_HEADER, 1);
+        curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
+        
         if($type == self::TYPE_POST) {
             curl_setopt($process, CURLOPT_POST, 1);
+            curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
         }
-        curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
+
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($process);
         curl_close($process);
