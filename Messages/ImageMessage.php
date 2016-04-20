@@ -50,8 +50,11 @@ class ImageMessage
             // Local file
 
             $res['message'] = [
-                'type' => 'image',
-                'payload' => []
+                'attachment' => [
+                    'type' => 'image',
+                    'payload' => []
+                ]
+
             ];
 
             $res['filedata'] = $this->text;
@@ -60,9 +63,11 @@ class ImageMessage
             // Url
 
             $res['message'] = [
-                'type' => 'image',
-                'payload' => [
-                    'url' => $this->text
+                'attachment' => [
+                    'type' => 'image',
+                    'payload' => [
+                        'url' => $this->text
+                    ]
                 ]
             ];
         }
