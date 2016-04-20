@@ -46,20 +46,8 @@ class ImageMessage
             ]
         ];
 
-        if (strpos($this->text, '@') === 0) {
-            // Local file
+        if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
 
-            $res['message'] = [
-                'attachment' => [
-                    'type' => 'image',
-                    'payload' => []
-                ]
-
-            ];
-
-            $res['filedata'] = $this->text;
-
-        } else {
             // Url
 
             $res['message'] = [
@@ -70,9 +58,41 @@ class ImageMessage
                     ]
                 ]
             ];
+
+        } else {
+
+            // Local file
+
+            $res['message'] = [
+                'attachment' => [
+                    'type' => 'image',
+                    'payload' => []
+                ]
+
+            ];
+
+            $res['filedata'] = $this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text));
         }
 
+        writeToLog($res);
 
         return $res;
+    }
+
+    protected function getCurlValue($filename, $contentType, $postname)
+    {
+        // PHP 5.5 introduced a CurlFile object that deprecates the old @filename syntax
+        // See: https://wiki.php.net/rfc/curl-file-upload
+        if (function_exists('curl_file_create')) {
+            return curl_file_create($filename, $contentType, $postname);
+        }
+
+        // Use the old style if using an older version of PHP
+        $value = "@{$this->filename};filename=" . $postname;
+        if ($contentType) {
+            $value .= ';type=' . $contentType;
+        }
+
+        return $value;
     }
 }
