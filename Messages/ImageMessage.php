@@ -74,8 +74,6 @@ class ImageMessage
             $res['filedata'] = $this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text));
         }
 
-        writeToLog($res);
-
         return $res;
     }
 
