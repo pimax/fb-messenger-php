@@ -48,14 +48,13 @@ class FbBotApp
      * Get User Profile Info
      *
      * @param $id
-     * @return array[first_name] First Name
-     * @return array[last_name] Last Name
-     * @return array[profile_pic] Profile Picture Url
+     * @param string $fields
+     * @return UserProfile
      */
-    public function userProfile($id)
+    public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender')
     {
         return new UserProfile($this->call($id, [
-            'fields' => 'first_name,last_name,profile_pic'
+            'fields' => $fields
         ], self::TYPE_GET));
     }
 

@@ -25,4 +25,19 @@ class UserProfile
     {
         return $this->data['profile_pic'];
     }
+
+    public function getLocale()
+    {
+        return $this->data['locale'];
+    }
+
+    public function getTimezone()
+    {
+        return $this->data['timezone'];
+    }
+
+    public function getGender()
+    {
+        return $this->data['gender'];
+    }
 }
