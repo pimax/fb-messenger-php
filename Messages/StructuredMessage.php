@@ -97,9 +97,9 @@ class StructuredMessage extends Message
     /**
      * StructuredMessage constructor.
      *
-     * @param $recipient
-     * @param $type
-     * @param $data
+     * @param string $recipient
+     * @param string $type
+     * @param array  $data
      */
     public function __construct($recipient, $type, $data)
     {

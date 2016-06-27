@@ -17,7 +17,7 @@ class Summary
     /**
      * Summary constructor.
      *
-     * @param $data
+     * @param array $data
      */
     public function __construct($data)
     {

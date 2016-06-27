@@ -21,14 +21,14 @@ class MessageButton
     /**
      * Button type
      *
-     * @var string|null
+     * @var null|string
      */
     protected $type = null;
 
     /**
      * Button title
      *
-     * @var string|null
+     * @var null|string
      */
     protected $title = null;
 
@@ -42,9 +42,9 @@ class MessageButton
     /**
      * MessageButton constructor.
      *
-     * @param $type Type
-     * @param $title Title
-     * @param string $url Url or postback
+     * @param string $type
+     * @param string $title
+     * @param string $url url or postback
      */
     public function __construct($type, $title, $url = '')
     {

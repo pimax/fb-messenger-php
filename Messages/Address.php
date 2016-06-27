@@ -17,7 +17,7 @@ class Address
     /**
      * Address constructor.
      *
-     * @param $data
+     * @param array $data
      */
     public function __construct($data)
     {
