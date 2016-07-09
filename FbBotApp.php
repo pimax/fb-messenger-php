@@ -2,6 +2,7 @@
 
 namespace pimax;
 
+use pimax\Messages\Message;
 
 class FbBotApp
 {
@@ -23,23 +24,26 @@ class FbBotApp
     protected $apiUrl = 'https://graph.facebook.com/v2.6/';
     
     /**
-     * BOT username
-     *
-     * @var string|null
+     * @var null|string
      */
     protected $token = null;
-    
+
+    /**
+     * FbBotApp constructor.
+     * @param string $token
+     */
     public function __construct($token)
     {
         $this->token = $token;
     }
+
     /**
      * Send Message
      *
      * @param Message $message
-     * @return mixed
+     * @return array
      */
-    public function send($message)
+    public function send(Message $message)
     {
         return $this->call('me/messages', $message->getData());
     }
@@ -47,7 +51,7 @@ class FbBotApp
     /**
      * Get User Profile Info
      *
-     * @param $id
+     * @param int    $id
      * @param string $fields
      * @return UserProfile
      */
@@ -61,8 +65,8 @@ class FbBotApp
     /**
      * Request to API
      *
-     * @param $url Url
-     * @param $data Data
+     * @param string $url
+     * @param array  $data
      * @param string $type Type of request (GET|POST)
      * @return array
      */

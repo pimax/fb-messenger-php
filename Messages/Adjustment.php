@@ -17,7 +17,7 @@ class Adjustment
     /**
      * Adjustment constructor.
      *
-     * @param $data
+     * @param array $data
      */
     public function __construct($data)
     {

@@ -28,11 +28,11 @@ class MessageReceiptElement extends MessageElement
     /**
      * MessageReceiptElement constructor.
      *
-     * @param $title
-     * @param $subtitle
+     * @param string $title
+     * @param string $subtitle
      * @param string $image_url
-     * @param int $quantity
-     * @param int $price
+     * @param int    $quantity
+     * @param int    $price
      * @param string $currency
      */
     public function __construct($title, $subtitle, $image_url = '', $quantity = 1, $price = 0, $currency = "USD")

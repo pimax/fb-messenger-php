@@ -13,7 +13,7 @@ class MessageElement
     /**
      * Title
      *
-     * @var string|null
+     * @var null|string
      */
     protected $title = null;
 
@@ -41,10 +41,10 @@ class MessageElement
     /**
      * MessageElement constructor.
      *
-     * @param $title
-     * @param $subtitle
+     * @param string $title
+     * @param string $subtitle
      * @param string $image_url
-     * @param array $buttons
+     * @param array  $buttons
      */
     public function __construct($title, $subtitle, $image_url = '', $buttons = [])
     {

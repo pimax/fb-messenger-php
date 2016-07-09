@@ -11,20 +11,20 @@ namespace pimax\Messages;
 class Message
 {
     /**
-     * @var integer|null
+     * @var null|string
      */
     protected $recipient = null;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $text = null;
 
     /**
      * Message constructor.
      *
-     * @param $recipient
-     * @param $text
+     * @param string $recipient
+     * @param string $text
      */
     public function __construct($recipient, $text)
     {

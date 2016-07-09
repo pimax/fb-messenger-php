@@ -11,20 +11,20 @@ namespace pimax\Messages;
 class ImageMessage
 {
     /**
-     * @var integer|null
+     * @var null|string
      */
     protected $recipient = null;
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $text = null;
 
     /**
      * Message constructor.
      *
-     * @param $recipient
-     * @param $file Web Url or local file with @ prefix
+     * @param string $recipient
+     * @param string $file Web Url or local file with @ prefix
      */
     public function __construct($recipient, $file)
     {
@@ -77,6 +77,12 @@ class ImageMessage
         return $res;
     }
 
+    /**
+     * @param string $filename
+     * @param string $contentType
+     * @param string $postname
+     * @return \CURLFile|string
+     */
     protected function getCurlValue($filename, $contentType, $postname)
     {
         // PHP 5.5 introduced a CurlFile object that deprecates the old @filename syntax
