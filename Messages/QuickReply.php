@@ -6,7 +6,8 @@ namespace pimax\Messages;
  *
  * @package pimax\Messages
  */
-class QuickReply extends Message{
+class QuickReply extends Message
+{
     /**
      * @var array
      */
@@ -24,7 +25,12 @@ class QuickReply extends Message{
         $this->quick_replies = $quick_replies;
         parent::__construct($recipient,$text);
     }
-    public function getData() {
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
         return [
             'recipient' =>  [
                 'id' => $this->recipient
@@ -34,8 +40,6 @@ class QuickReply extends Message{
                 'quick_replies'=>$this->quick_replies
             ]
         ];
-
-        
     }
 }
 
