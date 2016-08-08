@@ -43,7 +43,7 @@ class FbBotApp
      * @param Message $message
      * @return array
      */
-    public function send(Message $message)
+    public function send($message)
     {
         return $this->call('me/messages', $message->getData());
     }
