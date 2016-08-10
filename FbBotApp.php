@@ -3,6 +3,7 @@
 namespace pimax;
 
 use pimax\Messages\Message;
+use pimax\Messages\MessageButton;
 
 class FbBotApp
 {
@@ -15,6 +16,11 @@ class FbBotApp
      * Request type POST
      */
     const TYPE_POST = "post";
+
+    /**
+     * Request type DELETE
+     */
+    const TYPE_DELETE = "delete";
     
     /**
      * FB Messenger API Url
@@ -63,11 +69,47 @@ class FbBotApp
     }
 
     /**
+     * Set Persistent Menu
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu
+     * @param MessageButton[] $buttons
+     * @return array
+     */
+    public function setPersistentMenu($buttons)
+    {
+        $elements = [];
+
+        foreach ($buttons as $btn) {
+            $elements[] = $btn->getData();
+        }
+
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'existing_thread',
+            'call_to_actions' => $elements
+        ], self::TYPE_POST);
+    }
+
+    /**
+     * Remove Persistent Menu
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu
+     * @return array
+     */
+    public function deletePersistentMenu()
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'existing_thread'
+        ], self::TYPE_POST);
+    }
+
+    /**
      * Request to API
      *
      * @param string $url
      * @param array  $data
-     * @param string $type Type of request (GET|POST)
+     * @param string $type Type of request (GET|POST|DELETE)
      * @return array
      */
     protected function call($url, $data, $type = self::TYPE_POST)
@@ -87,9 +129,13 @@ class FbBotApp
         curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
         
-        if($type == self::TYPE_POST) {
+        if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
             curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
+        }
+
+        if ($type == self::TYPE_DELETE) {
+            curl_setopt($process, CURLOPT_CUSTOMREQUEST, "DELETE");
         }
 
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
