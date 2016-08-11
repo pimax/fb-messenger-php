@@ -53,7 +53,7 @@ class MessageElement
      * @param string $image_url
      * @param array  $buttons
      */
-    public function __construct($title = '', $subtitle = '', $url = '', $image_url = '', $buttons = [])
+    public function __construct($title, $subtitle, $image_url = '', $buttons = [], $url = '')
     {
         $this->title = $title;
         $this->subtitle = $subtitle;
