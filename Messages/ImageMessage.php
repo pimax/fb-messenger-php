@@ -50,12 +50,14 @@ class ImageMessage extends Message
 
         if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
+            $res['message'] = $attachment->getData();
         } else {
             $attachment->setPayload(array('url' => basename($this->text)));
             $attachment->setFileData($this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text)));
+            $res['message'] = $attachment->getData();
+            $res['filedata'] = $res['message']['filedata'];
+            unset($res['message']['filedata']);
         }
-
-        $res['message'] = $attachment->getData();
 
         return $res;
     }
