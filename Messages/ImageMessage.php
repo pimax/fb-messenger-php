@@ -51,6 +51,7 @@ class ImageMessage extends Message
         if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
         } else {
+            $attachment->setPayload(array('url' => basename($this->text)));
             $attachment->setFileData($this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text)));
         }
 
