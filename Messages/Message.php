@@ -65,10 +65,12 @@ class Message
         //}
 
         // Use the old style if using an older version of PHP
-        $value = "@{$filename};filename=" . $postname;
+        /*$value = "@{$filename};filename=" . $postname;
         if ($contentType) {
             $value .= ';type=' . $contentType;
-        }
+        }*/
+
+        $value = "@{$filename}";
 
         return $value;
     }
