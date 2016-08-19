@@ -35,6 +35,12 @@ class AccountLink
    * @var null|string 
    */
   protected $subtitle = null;
+  
+  /**
+   * Logout
+   * @var null|bool
+   */
+  protected $logout = null;
 
   /**
    * AccountLink constructor.
@@ -44,12 +50,13 @@ class AccountLink
    * @param string $url button url
    * @param string $image_url
    */
-  public function __construct($title, $subtitle = '', $url = '', $image_url = '')
+  public function __construct($title, $subtitle = '', $url = '', $image_url = '', $logout = FALSE)
   {
     $this->title = $title;
     $this->subtitle = $subtitle;
     $this->url = $url;
     $this->image_url = $image_url;
+    $this->logout = $logout;
   }
 
   /**
@@ -59,7 +66,15 @@ class AccountLink
    */
   public function getData()
   {
-    $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_LINK, '', $this->url );
+    if($this->logout)
+    {
+      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_UNLINK, '');
+    }
+    else
+    {
+      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_LINK, '', $this->url);
+    }
+    
     $result = [
       'title' => $this->title,
       'subtitle' => $this->subtitle,
