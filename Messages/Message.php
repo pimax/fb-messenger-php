@@ -98,7 +98,7 @@ class Message
         }
 
         // Use the old style if using an older version of PHP
-        $value = "@{$filename}" . $postname ?: ";filename={$postname}" . $contentType ?: ";type={$contentType}";
+        $value = "@{$filename}" . ($postname ? ";filename={$postname}" : "") . ($contentType ? ";type={$contentType}" : "");
 
         return $value;
     }
