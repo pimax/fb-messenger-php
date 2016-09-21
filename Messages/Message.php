@@ -21,6 +21,11 @@ class Message
     protected $text = null;
 
     /**
+     * @var null|string
+     */
+    protected $type = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
@@ -40,14 +45,42 @@ class Message
      */
     public function getData()
     {
-        return [
-            'recipient' =>  [
-                'id' => $this->recipient
-            ],
-            'message' => [
-                'text' => $this->text
-            ]
-        ];
+        if (isset($this->type)) {
+            $res = [
+                'recipient' =>  [
+                    'id' => $this->recipient
+                ]
+            ];
+
+            $attachment = new Attachment($this->type);
+
+            if (preg_match("/^http[s]{0,1}\:\/\//", $this->text)) {
+                $attachment->setPayload(['url' => $this->text]);
+                $res['message'] = $attachment->getData();
+            } else {
+                $attachment->setFileData($this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text)));
+                $res['message'] = $attachment->getData();
+                $res['filedata'] = $res['message']['filedata'];
+                unset($res['message']['filedata']);
+            }
+
+            foreach ($res as $key => $value) {
+                $res[$key] = is_array($value) ? json_encode($value) : $value;
+            }
+
+            var_dump($res);
+
+            return $res;
+        } else {
+            return [
+                'recipient' =>  [
+                    'id' => $this->recipient
+                ],
+                'message' => [
+                    'text' => $this->text
+                ]
+            ];
+        }
     }
 
     /**
@@ -56,8 +89,10 @@ class Message
      * @param string $postname
      * @return \CURLFile|string
      */
-    protected function getCurlValue($filename, $contentType, $postname)
+    protected function getCurlValue($filename, $contentType = "", $postname = "")
     {
+        $filename = realpath($filename);
+
         // PHP 5.5 introduced a CurlFile object that deprecates the old @filename syntax
         // See: https://wiki.php.net/rfc/curl-file-upload
         if (function_exists('curl_file_create')) {
@@ -65,10 +100,7 @@ class Message
         }
 
         // Use the old style if using an older version of PHP
-        $value = "@{$this->filename};filename=" . $postname;
-        if ($contentType) {
-            $value .= ';type=' . $contentType;
-        }
+        $value = "@{$filename}" . $postname ?: ";filename={$postname}" . $contentType ?: ";type={$contentType}";
 
         return $value;
     }
