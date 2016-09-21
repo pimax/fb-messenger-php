@@ -119,7 +119,7 @@ class FbBotApp
         $query['access_token'] = $this->token;
 
         $headers = [
-            'Content-Type: multipart/form-data',
+            'Content-Type: application/json',
         ];
 
         $url .= "?" . http_build_query($query);
