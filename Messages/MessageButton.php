@@ -19,6 +19,16 @@ class MessageButton
     const TYPE_POSTBACK = "postback";
 
     /**
+     * Phone number button type
+     */
+    const TYPE_PHONE_NUMBER = "phone_number";
+
+    /**
+     * Element share button type
+     */
+    const TYPE_ELEMENT_SHARE = "element_share";
+
+    /**
      * Button type
      *
      * @var null|string
@@ -46,7 +56,7 @@ class MessageButton
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $url = '')
+    public function __construct($type, $title = '', $url = '')
     {
         $this->type = $type;
         $this->title = $title;
@@ -60,7 +70,7 @@ class MessageButton
 
     /**
      * Get Button data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -72,6 +82,10 @@ class MessageButton
 
         switch($this->type)
         {
+            case self::TYPE_ELEMENT_SHARE:
+                unset($result['title']);
+            break;
+            case self::TYPE_PHONE_NUMBER:
             case self::TYPE_POSTBACK:
                 $result['payload'] = $this->url;
             break;
