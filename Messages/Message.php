@@ -68,8 +68,6 @@ class Message
                 $res[$key] = is_array($value) ? json_encode($value) : $value;
             }
 
-            var_dump($res);
-
             return $res;
         } else {
             return [
