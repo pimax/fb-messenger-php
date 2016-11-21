@@ -19,6 +19,11 @@ class MessageButton
     const TYPE_POSTBACK = "postback";
 
     /**
+     * account_link button type
+     */
+    const TYPE_ACCOUNT_LINK = "account_link";
+
+    /**
      * Button type
      *
      * @var null|string
@@ -76,7 +81,7 @@ class MessageButton
                 $result['payload'] = $this->url;
             break;
 
-            case self::TYPE_WEB:
+            case self::TYPE_WEB || self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
         }
