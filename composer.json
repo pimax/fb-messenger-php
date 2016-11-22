@@ -16,6 +16,6 @@
   },
 
   "autoload": {
-    "psr-4": { "alimgulov\\": "" }
+    "psr-4": { "pimax\\": "" }
   }
 }
