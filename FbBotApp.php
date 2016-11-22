@@ -144,4 +144,34 @@ class FbBotApp
 
         return json_decode($return, true);
     }
+
+    /**
+     * @param array $buttons
+     * @return array
+     */
+    public function setStart($buttons)
+    {
+        
+        $elements = [];
+
+        foreach ($buttons as $btn) {
+            $elements[] = $btn->getData();
+        }
+        
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread',
+            'call_to_actions' => $elements
+        ], self::TYPE_POST);
+
+    }
+
+    public function deleteStart()
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread'
+        ], self::TYPE_DELETE);
+    }
+
 }

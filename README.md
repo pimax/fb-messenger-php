@@ -11,9 +11,7 @@ INSTALLATION
 ------------
 
 ```
-composer require "pimax/fb-messenger-php" "dev-master"
+composer require "alimgulov/fb-messenger-php" "dev-master"
 ```
 
-BASIC USAGE
-------------
-See this repo - [https://github.com/pimax/fb-messenger-php-example](https://github.com/pimax/fb-messenger-php-example)
+This is a fork from - [https://github.com/pimax/fb-messenger-php](https://github.com/pimax/fb-messenger-php)

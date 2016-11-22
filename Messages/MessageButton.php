@@ -19,6 +19,11 @@ class MessageButton
     const TYPE_POSTBACK = "postback";
 
     /**
+     * account_link button type
+     */
+    const TYPE_ACCOUNT_LINK = "account_link";
+
+    /**
      * Button type
      *
      * @var null|string
@@ -65,18 +70,21 @@ class MessageButton
      */
     public function getData()
     {
-        $result = [
-            'type' => $this->type,
-            'title' => $this->title,
-        ];
+        $result = ['type' => $this->type];
 
         switch($this->type)
         {
             case self::TYPE_POSTBACK:
                 $result['payload'] = $this->url;
+                $result['title'] = $this->title;
             break;
 
             case self::TYPE_WEB:
+                $result['url'] = $this->url;
+                $result['title'] = $this->title;
+            break;
+
+            case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
         }
