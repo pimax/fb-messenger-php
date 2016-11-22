@@ -70,18 +70,21 @@ class MessageButton
      */
     public function getData()
     {
-        $result = [
-            'type' => $this->type,
-            'title' => $this->title,
-        ];
+        $result = ['type' => $this->type];
 
         switch($this->type)
         {
             case self::TYPE_POSTBACK:
                 $result['payload'] = $this->url;
+                $result['title'] = $this->title;
             break;
 
-            case self::TYPE_WEB || self::TYPE_ACCOUNT_LINK:
+            case self::TYPE_WEB:
+                $result['url'] = $this->url;
+                $result['title'] = $this->title;
+            break;
+
+            case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
         }
