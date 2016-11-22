@@ -1,7 +1,7 @@
 {
-  "name": "Alimgulov/fb-messenger-php",
+  "name": "alimgulov/fb-messenger-php",
   "description": " Facebook Messenger Bot PHP API",
-  "homepage": "https://github.com/Alimgulov/fb-messenger-php",
+  "homepage": "https://github.com/alimgulov/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
