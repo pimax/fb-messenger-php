@@ -11,7 +11,7 @@ class FbBotApp
      * Request type GET
      */
     const TYPE_GET = "get";
-    
+
     /**
      * Request type POST
      */
@@ -21,14 +21,14 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
-    
+
     /**
      * FB Messenger API Url
      *
      * @var string
      */
     protected $apiUrl = 'https://graph.facebook.com/v2.6/';
-    
+
     /**
      * @var null|string
      */
@@ -105,6 +105,36 @@ class FbBotApp
     }
 
     /**
+     * Set Started Button
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/get-started-button
+     * @param String $payload
+     * @return array
+     */
+    public function setStartedButton($payload)
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread',
+            'call_to_actions' => [["payload" => $payload]]
+        ], self::TYPE_POST);
+    }
+
+    /**
+     * Remove Started Button
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/get-started-button
+     * @return array
+     */
+    public function deleteStartedButton()
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread'
+        ], self::TYPE_DELETE);
+    }
+
+    /**
      * Request to API
      *
      * @param string $url
@@ -128,7 +158,7 @@ class FbBotApp
         curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
-        
+
         if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
             curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
