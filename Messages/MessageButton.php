@@ -38,6 +38,20 @@ class MessageButton
     protected $title = null;
 
     /**
+     * Button webview_height_ratio
+     *
+     * @var null|string
+     */
+    protected $webview_height_ratio = null;
+    
+    /**
+     * Button messenger_extensions
+     *
+     * @var null|boolean
+     */
+    protected $messenger_extensions = null;    
+
+    /**
      * Button url
      *
      * @var null|string
@@ -49,23 +63,27 @@ class MessageButton
      *
      * @param string $type
      * @param string $title
+     * @param string $webview_height_ratio
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $url = '')
+    public function __construct($type, $title, $url = '', $webview_height_ratio = '', $messenger_extensions = false)
     {
         $this->type = $type;
         $this->title = $title;
-
+        $this->webview_height_ratio = $webview_height_ratio;	
+        $this->messenger_extensions = $messenger_extensions;
+	
         if (!$url) {
             $url = $title;
         }
+
 
         $this->url = $url;
     }
 
     /**
      * Get Button data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -73,7 +91,12 @@ class MessageButton
         $result = [
             'type' => $this->type,
             'title' => $this->title,
+            'webview_height_ratio' => $this->webview_height_ratio
         ];
+	
+	if ($this->messenger_extensions == true) {
+    	     $result['messenger_extensions'] = $this->messenger_extensions;
+	}
 
         switch($this->type)
         {
