@@ -11,6 +11,21 @@ namespace pimax\Messages;
 class Message
 {
     /**
+     * Push notification type: REGULAR
+     */
+    const NOTIFICATION_REGULAR = "REGULAR";
+
+    /**
+     * Push notification type: SILENT_PUSH
+     */
+    const NOTIFICATION_SILENT_PUSH = "SILENT_PUSH";
+
+    /**
+     * Push notification type: NO_PUSH
+     */
+    const NOTIFICATION_NO_PUSH = "NO_PUSH";
+    
+    /**
      * @var null|string
      */
     protected $recipient = null;
@@ -21,16 +36,22 @@ class Message
     protected $text = null;
 
     /**
+     * @var null|string
+     */
+    protected $notification_type = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
      * @param string $text
+     * @param string $notification_type
      */
-    public function __construct($recipient, $text)
+    public function __construct($recipient, $text, $notification_type = self::NOTIFICATION_REGULAR)
     {
         $this->recipient = $recipient;
         $this->text = $text;
-
+        $this->notification_type = $notification_type;
     }
 
     /**
@@ -46,7 +67,10 @@ class Message
             ],
             'message' => [
                 'text' => $this->text
-            ]
+            ],
+            'notification_type' =>
+                $this->notification_type
+
         ];
     }
 
