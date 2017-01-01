@@ -1,5 +1,6 @@
 FB Messenger Bot PHP API
 ========================
+Forked from https://github.com/pimax/fb-messenger-php.
 
 This is a PHP implementation for Facebook Messenger Bot API.
 
