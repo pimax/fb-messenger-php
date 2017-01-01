@@ -11,7 +11,7 @@ INSTALLATION
 ------------
 
 ```
-composer require "pimax/fb-messenger-php" "dev-master"
+composer require "hvointern/fb-messenger-php" "dev-master"
 ```
 
 BASIC USAGE
