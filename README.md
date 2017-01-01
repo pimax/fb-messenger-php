@@ -16,4 +16,4 @@ composer require "hvointern/fb-messenger-php" "dev-master"
 
 BASIC USAGE
 ------------
-See this repo - [https://github.com/pimax/fb-messenger-php-example](https://github.com/pimax/fb-messenger-php-example)
+See this repo - [https://github.com/hvointern\FbMessenger/fb-messenger-php-example](https://github.com/hvointern\FbMessenger/fb-messenger-php-example)

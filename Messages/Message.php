@@ -1,12 +1,12 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 
 /**
  * Class Message
  *
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class Message
 {

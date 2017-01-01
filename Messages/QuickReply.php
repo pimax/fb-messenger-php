@@ -1,10 +1,10 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 /**
  * Class QuickReply
  *
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class QuickReply extends Message{
     /**

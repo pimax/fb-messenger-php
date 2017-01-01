@@ -1,6 +1,6 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 /**
  * Class Attachment

@@ -1,9 +1,9 @@
 <?php
 
-namespace pimax;
+namespace hvointern\FbMessenger;
 
-use pimax\Messages\Message;
-use pimax\Messages\MessageButton;
+use hvointern\FbMessenger\Messages\Message;
+use hvointern\FbMessenger\Messages\MessageButton;
 
 class FbBotApp
 {

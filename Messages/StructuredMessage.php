@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 /**
  * Class StructuredMessage
  *
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class StructuredMessage extends Message
 {
