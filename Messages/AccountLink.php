@@ -1,10 +1,10 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 /**
  * Class AccountLink
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class AccountLink
 {

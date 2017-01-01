@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 /**
  * Class Adjustment
  *
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class Adjustment
 {

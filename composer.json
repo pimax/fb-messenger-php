@@ -9,6 +9,12 @@
       "email": "m.pinyugin@gmail.com",
       "homepage": "http://russian-developers.com",
       "role": "Developer"
+    },
+    {
+      "name": "Fabian Witt",
+      "email": "support@hvointern.de",
+      "homepage": "https://hvointern.de",
+      "role": "Developer"
     }
   ],
   "require": {
@@ -16,6 +22,6 @@
   },
 
   "autoload": {
-    "psr-4": { "pimax\\": "" }
+    "psr-4": { "hvointern\\FbMessenger\\": "" }
   }
 }
