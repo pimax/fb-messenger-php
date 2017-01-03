@@ -4,6 +4,7 @@ namespace hvointern\FbMessenger;
 
 use hvointern\FbMessenger\Messages\Message;
 use hvointern\FbMessenger\Messages\MessageButton;
+use hvointern\FbMessenger\Messages\SenderAction;
 
 class FbBotApp
 {
@@ -52,6 +53,17 @@ class FbBotApp
     public function send($message)
     {
         return $this->call('me/messages', $message->getData());
+    }
+
+    /**
+     * Sender Action
+     *
+     * @param SenderAction $action
+     * @return array
+     */
+    public function senderAction($action)
+    {
+        return $this->call('me/messages', $action->getData());
     }
 
     /**
