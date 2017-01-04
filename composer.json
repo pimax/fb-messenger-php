@@ -1,13 +1,19 @@
 {
-  "name": "pimax/fb-messenger-php",
-  "description": " Facebook Messenger Bot PHP API",
-  "homepage": "https://github.com/pimax/fb-messenger-php",
+  "name": "hvointern/fb-messenger-php",
+  "description": "Facebook Messenger Bot PHP API",
+  "homepage": "https://github.com/hvointern/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
       "name": "Max Pinyugin",
       "email": "m.pinyugin@gmail.com",
       "homepage": "http://russian-developers.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Fabian Witt",
+      "email": "support@hvointern.de",
+      "homepage": "https://hvointern.de",
       "role": "Developer"
     }
   ],
@@ -16,6 +22,6 @@
   },
 
   "autoload": {
-    "psr-4": { "pimax\\": "" }
+    "psr-4": { "hvointern\\FbMessenger\\": "" }
   }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace pimax\Messages;
+namespace hvointern\FbMessenger\Messages;
 
 
 /**
  * Class VideoMessage
  *
- * @package pimax\Messages
+ * @package hvointern\FbMessenger\Messages
  */
 class VideoMessage extends Message
 {

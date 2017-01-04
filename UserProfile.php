@@ -1,6 +1,6 @@
 <?php
 
-namespace pimax;
+namespace hvointern\FbMessenger;
 
 class UserProfile
 {

@@ -1,19 +1,5 @@
-FB Messenger Bot PHP API
-========================
+## This repo will be disabled in a few days.
 
-This is a PHP implementation for Facebook Messenger Bot API.
+## Please use the following repo
 
-REQUIREMENTS
-------------
-The minimum requirement is that your Web server supports PHP 5.4.
-
-INSTALLATION
-------------
-
-```
-composer require "pimax/fb-messenger-php" "dev-master"
-```
-
-BASIC USAGE
-------------
-See this repo - [https://github.com/pimax/fb-messenger-php-example](https://github.com/pimax/fb-messenger-php-example)
+https://github.com/wittfabian/fb-messenger-php
