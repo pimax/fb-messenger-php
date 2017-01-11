@@ -66,7 +66,7 @@ class MessageButton
      * @param string $webview_height_ratio
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $url = '', $webview_height_ratio = '', $messenger_extensions = false)
+    public function __construct($type, $title, $url = '', $webview_height_ratio = 'full', $messenger_extensions = false) 
     {
         $this->type = $type;
         $this->title = $title;
