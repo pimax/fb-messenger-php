@@ -29,11 +29,6 @@ class MessageButton
     const TYPE_ACCOUNT_UNLINK = "account_unlink";
 
     /**
-     * account_link button type
-     */
-    const TYPE_ACCOUNT_LINK = "account_link";
-
-    /**
      * Button type
      *
      * @var null|string
@@ -120,10 +115,6 @@ class MessageButton
               $result['url'] = $this->url;
             break;
           
-            case self::TYPE_ACCOUNT_LINK:
-                $result['url'] = $this->url;
-            break;
-
             case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
