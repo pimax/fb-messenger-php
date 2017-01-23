@@ -107,12 +107,13 @@ class FbBotApp
     /**
      * Request to API
      *
+     * @access public
      * @param string $url
      * @param array  $data
      * @param string $type Type of request (GET|POST|DELETE)
      * @return array
      */
-    protected function call($url, $data, $type = self::TYPE_POST)
+    public function call($url, $data, $type = self::TYPE_POST)
     {
         $data['access_token'] = $this->token;
 
