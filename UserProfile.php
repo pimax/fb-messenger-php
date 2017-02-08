@@ -13,31 +13,31 @@ class UserProfile
 
     public function getFirstName()
     {
-        return $this->data['first_name'];
+        return isset($this->data['first_name']) ? $this->data['first_name'] : null;
     }
 
     public function getLastName()
     {
-        return $this->data['last_name'];
+        return isset($this->data['last_name']) ? $this->data['last_name'] : null;
     }
 
     public function getPicture()
     {
-        return $this->data['profile_pic'];
+        return isset($this->data['profile_pic']) ? $this->data['profile_pic'] : null;
     }
 
     public function getLocale()
     {
-        return $this->data['locale'];
+        return isset($this->data['locale']) ? $this->data['locale'] : null;
     }
 
     public function getTimezone()
     {
-        return $this->data['timezone'];
+        return isset($this->data['timezone']) ? $this->data['timezone'] : null;
     }
 
     public function getGender()
     {
-        return $this->data['gender'];
+        return isset($this->data['gender']) ? $this->data['gender'] : null;
     }
 }
