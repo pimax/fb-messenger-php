@@ -11,7 +11,7 @@ class FbBotApp
      * Request type GET
      */
     const TYPE_GET = "get";
-    
+
     /**
      * Request type POST
      */
@@ -21,14 +21,14 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
-    
+
     /**
      * FB Messenger API Url
      *
      * @var string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.6/';
-    
+    protected $apiUrl = 'https://graph.facebook.com/';
+
     /**
      * @var null|string
      */
@@ -38,9 +38,10 @@ class FbBotApp
      * FbBotApp constructor.
      * @param string $token
      */
-    public function __construct($token)
+    public function __construct($token, $version = 2.7)
     {
         $this->token = $token;
+        $this->apiUrl .= "v{$version}/";
     }
 
     /**
@@ -145,25 +146,35 @@ class FbBotApp
      */
     public function call($url, $data, $type = self::TYPE_POST)
     {
-        $data['access_token'] = $this->token;
+        $query = [];
+        $query['access_token'] = $this->token;
 
         $headers = [
             'Content-Type: application/json',
         ];
 
+        $url .= "?" . http_build_query($query);
+
         if ($type == self::TYPE_GET) {
-            $url .= '?'.http_build_query($data);
+            $url .= '&' . http_build_query($data);
         }
 
         $process = curl_init($this->apiUrl.$url);
-        curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
-        
-        if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
+
+        if ($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
-            curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
+            if (isset($data["filedata"])) {
+                curl_setopt($process, CURLOPT_POSTFIELDS, $data);
+                $headers = ["Content-Type: multipart/form-data"];
+            } else {
+                curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
+                $headers = ["Content-Type: application/json"];
+            }
         }
+
+        curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
 
         if ($type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_CUSTOMREQUEST, "DELETE");
