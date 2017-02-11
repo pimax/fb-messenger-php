@@ -69,6 +69,36 @@ class FbBotApp
     }
 
     /**
+     * Set Get Started Button
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/get-started-button
+     * @param string $payload
+     * @return array
+     */
+    public function setGetStartedButton($payload)
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread',
+            'call_to_actions' => [ ['payload' => $payload] ]
+        ], self::TYPE_POST);
+    }
+    
+    /**
+     * Delete Get Started Button
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/get-started-button
+     * @return array
+     */
+    public function deleteGetStartedButton()
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'call_to_actions',
+            'thread_state' => 'new_thread'
+        ], self::TYPE_DELETE);
+    }
+    
+    /**
      * Set Persistent Menu
      *
      * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu
