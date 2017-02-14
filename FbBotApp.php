@@ -98,6 +98,36 @@ class FbBotApp
         ], self::TYPE_DELETE);
     }
     
+    
+    /**
+     * Set Greeting Message
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/greeting-text
+     * @param string $greetingText
+     * @return array
+     */
+    public function setGreetingText($greetingText){
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'greeting',
+            'greeting' => ['text' => $greetingText]
+        ], self::TYPE_POST);
+    }
+    
+    
+    /**
+     * Delete Greeting Text
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/greeting-text
+     * @return array
+     */
+    public function deleteGreetingText()
+    {
+        return $this->call('me/thread_settings', [
+            'setting_type' => 'greeting'
+        ], self::TYPE_DELETE);
+    }
+    
+    
     /**
      * Set Persistent Menu
      *
