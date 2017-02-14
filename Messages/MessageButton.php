@@ -48,6 +48,27 @@ class MessageButton
      * @var null|string
      */
     protected $url = null;
+    
+    /**
+     * Webview height ratio ("compact", "tall" or "full")
+     *
+     * @var null|string
+     */
+    protected $webview_height_ratio = null;
+
+    /**
+     * Messenger extensions which enable your web page to integrate with Messenger using js
+     *
+     * @var boolean
+     */
+    protected $messenger_extensions = false;
+
+    /**
+     * Fallback url to use on clients that don't support Messenger Extensions
+     *
+     * @var null|string
+     */
+    protected $fallback_url = null;
 
     /**
      * MessageButton constructor.
@@ -56,10 +77,14 @@ class MessageButton
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $url = '')
+    public function __construct($type, $title, $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '')
     {
         $this->type = $type;
         $this->title = $title;
+        
+        $this->webview_height_ratio = $webview_height_ratio;
+        $this->messenger_extensions = $messenger_extensions;
+        $this->fallback_url = $fallback_url;
 
         if (!$url) {
             $url = $title;
@@ -89,6 +114,12 @@ class MessageButton
             case self::TYPE_WEB:
               $result['title'] = $this->title;
               $result['url'] = $this->url;
+                
+              if ($this->webview_height_ratio) {
+                  $result['webview_height_ratio'] = $this->webview_height_ratio;
+                  $result['messenger_extensions'] = $this->messenger_extensions;
+                  $result['fallback_url'] = $this->fallback_url;
+              }
             break;
           
             case self::TYPE_ACCOUNT_LINK:
