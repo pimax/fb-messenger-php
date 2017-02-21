@@ -122,6 +122,9 @@ class MessageButton
                 
               if ($this->webview_height_ratio) {
                   $result['webview_height_ratio'] = $this->webview_height_ratio;
+              }
+              
+              if ($this->messenger_extensions){
                   $result['messenger_extensions'] = $this->messenger_extensions;
                   $result['fallback_url'] = $this->fallback_url;
               }
