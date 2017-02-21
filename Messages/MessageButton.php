@@ -19,6 +19,11 @@ class MessageButton
     const TYPE_POSTBACK = "postback";
     
     /**
+     * Postback button type
+     */
+    const TYPE_SHARE = "element_share";
+    
+    /**
      * Account link type
      */
     const TYPE_ACCOUNT_LINK = "account_link";
@@ -77,7 +82,7 @@ class MessageButton
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '')
+    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '')
     {
         $this->type = $type;
         $this->title = $title;
@@ -128,6 +133,10 @@ class MessageButton
            
             case self::TYPE_ACCOUNT_UNLINK:
               //only type needed
+            break;
+            
+            case self::TYPE_SHARE:
+              //only type needed  
             break;
         }
 
