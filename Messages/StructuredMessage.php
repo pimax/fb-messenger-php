@@ -18,6 +18,11 @@ class StructuredMessage extends Message
      * Structured message generic type
      */
     const TYPE_GENERIC = "generic";
+    
+    /**
+     * Structured message list type
+     */
+    const TYPE_LIST = "list";
 
     /**
      * Structured message receipt type
@@ -93,6 +98,12 @@ class StructuredMessage extends Message
      * @var array
      */
     protected $adjustments = [];
+    
+    /**
+     * @var string
+     */
+    protected $top_element_style = 'large';
+    
 
     /**
      * StructuredMessage constructor.
@@ -115,6 +126,24 @@ class StructuredMessage extends Message
 
             case self::TYPE_GENERIC:
                 $this->elements = $data['elements'];
+            break;
+        
+            case self::TYPE_LIST:
+                $this->elements = $data['elements'];
+                //allowed is a sinle button for the whole list
+                if(isset($data['buttons'])){
+                    $this->buttons = $data['buttons'];
+                }
+                //the top_element_style indicate if the first item is featured or not.
+                //default is large
+                if(isset($data['top_element_style'])){
+                    $this->top_element_style = $data['top_element_style'];
+                }
+                //if the top_element_style is large the first element image_url MUST be set.
+                if($this->top_element_style == 'large' && (!isset($data['elements'][0]->getData()['image_url']) || $data['elements'][0]->getData()['image_url'] == '')){
+                    $message = 'Facbook require the image_url to be set for the first element if the top_element_style is large. set the image_url or change the top_element_style to compact.';
+                    throw new \Exception($message);
+                }
             break;
 
             case self::TYPE_RECEIPT:
@@ -165,6 +194,19 @@ class StructuredMessage extends Message
 
                 foreach ($this->elements as $btn) {
                     $result['attachment']['payload']['elements'][] = $btn->getData();
+                }
+            break;
+            
+            case self::TYPE_LIST:
+                $result['attachment']['payload']['elements'] = [];
+                $result['attachment']['payload']['top_element_style'] = $this->top_element_style;
+                //list items button
+                foreach ($this->elements as $btn) {
+                    $result['attachment']['payload']['elements'][] = $btn->getData();
+                }
+                //the whole list button
+                foreach ($this->buttons as $btn) {
+                    $result['attachment']['payload']['buttons'][] = $btn->getData();
                 }
             break;
 
