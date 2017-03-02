@@ -77,10 +77,8 @@ class FbBotApp
      */
     public function setGetStartedButton($payload)
     {
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'call_to_actions',
-            'thread_state' => 'new_thread',
-            'call_to_actions' => [ ['payload' => $payload] ]
+        return $this->call('me/messenger_profile', [
+            'get_started' => ['payload' => $payload]
         ], self::TYPE_POST);
     }
     
@@ -92,10 +90,9 @@ class FbBotApp
      */
     public function deleteGetStartedButton()
     {
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'call_to_actions',
-            'thread_state' => 'new_thread'
-        ], self::TYPE_DELETE);
+        return $this->call('me/messenger_profile', [
+            'fields' => ['get_started'],
+        ], self::TYPE_DELETE); 
     }
     
     
@@ -129,38 +126,35 @@ class FbBotApp
     
     
     /**
-     * Set Persistent Menu
+     * Set Nested Menu
      *
-     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu
-     * @param MessageButton[] $buttons
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
+     * @param Menu\MenuItem[] $menuItems
      * @return array
      */
-    public function setPersistentMenu($buttons)
+    public function setPersistentMenu($menuItems)
     {
         $elements = [];
 
-        foreach ($buttons as $btn) {
-            $elements[] = $btn->getData();
+        foreach ($menuItems as $item) {
+            $elements[] = $item->getData();
         }
-
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'call_to_actions',
-            'thread_state' => 'existing_thread',
-            'call_to_actions' => $elements
+        
+        return $this->call('me/messenger_profile', [
+            'persistent_menu' => $elements
         ], self::TYPE_POST);
     }
-
+    
     /**
      * Remove Persistent Menu
      *
-     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/persistent-menu
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
      * @return array
      */
     public function deletePersistentMenu()
     {
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'call_to_actions',
-            'thread_state' => 'existing_thread'
+        return $this->call('me/messenger_profile', [
+            'fields' => ['persistent_menu'],
         ], self::TYPE_DELETE);
     }
 
