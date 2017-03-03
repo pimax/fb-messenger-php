@@ -17,17 +17,17 @@ class MessageButton
      * Postback button type
      */
     const TYPE_POSTBACK = "postback";
-    
+
     /**
      * Postback button type
      */
     const TYPE_SHARE = "element_share";
-    
+
     /**
      * Account link type
      */
     const TYPE_ACCOUNT_LINK = "account_link";
-  
+
     /**
      * Account unlink type
      */
@@ -53,7 +53,7 @@ class MessageButton
      * @var null|string
      */
     protected $url = null;
-    
+
     /**
      * Webview height ratio ("compact", "tall" or "full")
      *
@@ -76,17 +76,23 @@ class MessageButton
     protected $fallback_url = null;
 
     /**
+     * The payload to send if the type is TYPE_POSTBACK.
+     * @var string
+     */
+    protected $payload;
+
+    /**
      * MessageButton constructor.
      *
      * @param string $type
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '')
+    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $payload = '')
     {
         $this->type = $type;
         $this->title = $title;
-        
+
         $this->webview_height_ratio = $webview_height_ratio;
         $this->messenger_extensions = $messenger_extensions;
         $this->fallback_url = $fallback_url;
@@ -94,13 +100,17 @@ class MessageButton
         if (!$url) {
             $url = $title;
         }
-
         $this->url = $url;
+
+        if (!$payload) {
+            $payload = $title;
+        }
+        $this->payload = $payload;
     }
 
     /**
      * Get Button data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -114,32 +124,33 @@ class MessageButton
             case self::TYPE_POSTBACK:
                 $result['payload'] = $this->url;
                 $result['title'] = $this->title;
+                $result['payload'] = $this->payload;
             break;
 
             case self::TYPE_WEB:
               $result['title'] = $this->title;
               $result['url'] = $this->url;
-                
+
               if ($this->webview_height_ratio) {
                   $result['webview_height_ratio'] = $this->webview_height_ratio;
               }
-              
+
               if ($this->messenger_extensions){
                   $result['messenger_extensions'] = $this->messenger_extensions;
                   $result['fallback_url'] = $this->fallback_url;
               }
             break;
-          
+
             case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
-           
+
             case self::TYPE_ACCOUNT_UNLINK:
               //only type needed
             break;
-            
+
             case self::TYPE_SHARE:
-              //only type needed  
+              //only type needed
             break;
         }
 
