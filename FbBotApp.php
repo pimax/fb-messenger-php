@@ -101,7 +101,7 @@ class FbBotApp
         return $this->call('me/thread_settings', [
             'setting_type' => 'call_to_actions',
             'thread_state' => 'existing_thread'
-        ], self::TYPE_POST);
+        ], self::TYPE_DELETE);
     }
 
     /**

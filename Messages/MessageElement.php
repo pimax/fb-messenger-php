@@ -32,6 +32,13 @@ class MessageElement
     protected $subtitle = null;
 
     /**
+     * Url
+     *
+     * @var null|string
+     */
+    protected $url = null;
+
+    /**
      * Buttons
      *
      * @var array
@@ -46,17 +53,18 @@ class MessageElement
      * @param string $image_url
      * @param array  $buttons
      */
-    public function __construct($title, $subtitle, $image_url = '', $buttons = [])
+    public function __construct($title, $subtitle, $image_url = '', $buttons = [], $url = '')
     {
         $this->title = $title;
         $this->subtitle = $subtitle;
+        $this->url = $url;
         $this->image_url = $image_url;
         $this->buttons = $buttons;
     }
 
     /**
      * Get Element data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -64,6 +72,7 @@ class MessageElement
         $result = [
             'title' => $this->title,
             'subtitle' => $this->subtitle,
+            'item_url' => $this->url,
             'image_url' => $this->image_url,
         ];
 
