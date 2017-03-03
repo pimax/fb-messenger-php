@@ -129,15 +129,15 @@ class FbBotApp
      * Set Nested Menu
      *
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
-     * @param Menu\MenuItem[] $menuItems
+     * @param Menu\LocalizedMenu[] $localizedMenu
      * @return array
      */
-    public function setPersistentMenu($menuItems)
+    public function setPersistentMenu($localizedMenu)
     {
         $elements = [];
 
-        foreach ($menuItems as $item) {
-            $elements[] = $item->getData();
+        foreach ($localizedMenu as $menu) {
+            $elements[] = $menu->getData();
         }
         
         return $this->call('me/messenger_profile', [
