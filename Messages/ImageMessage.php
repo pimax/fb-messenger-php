@@ -21,16 +21,22 @@ class ImageMessage extends Message
     protected $text = null;
 
     /**
+     * @var null|array
+     */
+    protected $quick_replies = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
      * @param string $file Web Url or local file with @ prefix
+     * @param $quick_replies - array of array("content_type","title","payload"),..,..
      */
-    public function __construct($recipient, $file)
+    public function __construct($recipient, $file, $quick_replies = null)
     {
         $this->recipient = $recipient;
         $this->text = $file;
-
+        $this->quick_replies = $quick_replies;
     }
 
     /**
@@ -43,7 +49,8 @@ class ImageMessage extends Message
         $res = [
             'recipient' =>  [
                 'id' => $this->recipient
-            ]
+            ],
+            'quick_replies' => $this->quick_replies
         ];
 
         $attachment = new Attachment(Attachment::TYPE_IMAGE);
