@@ -28,10 +28,8 @@ class UserProfile
     
     public function getFBID()
     {
-        return !isset($this->data['profile_pic']) ? null;
-
-        $ProfileImage = $this->data['profile_pic'] ;
-        $ProfileImagevars = preg_split("#/#", $ProfileImage); 
+    
+        $ProfileImagevars = preg_split("#/#", getPicture()); 
 
         foreach ($ProfileImagevars as &$value) {
             if (strpos($value, '.jpg') !== false) {
@@ -42,7 +40,8 @@ class UserProfile
 
         $JPGPartsplit = preg_split("#_#",$JPGPart); 
         $FacebookID = $JPGPartsplit[1] ;
-        return  $FacebookID;
+        return isset($FacebookID) ? $FacebookID : null;
+ 
     }
     public function getLocale()
     {
