@@ -29,7 +29,7 @@ class UserProfile
     public function getFBID()
     {
     
-        $ProfileImagevars = preg_split("#/#", getPicture()); 
+        $ProfileImagevars = preg_split("#/#", $this->data['profile_pic']); 
 
         foreach ($ProfileImagevars as &$value) {
             if (strpos($value, '.jpg') !== false) {
@@ -54,7 +54,7 @@ class UserProfile
     }
 
     public function getGender()
-    {
+    { 
         return isset($this->data['gender']) ? $this->data['gender'] : null;
     }
 }
