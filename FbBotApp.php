@@ -103,7 +103,6 @@ class FbBotApp
      * @return array
      */
     public function setGreetingText($localizedGreetings){
-        //var_dump($localizedGreetings);
         return $this->call('me/messenger_profile', [
             'greeting' => $localizedGreetings
         ], self::TYPE_POST);
