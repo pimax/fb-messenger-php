@@ -3,7 +3,6 @@
 namespace pimax;
 
 use pimax\Messages\Message;
-use pimax\Messages\MessageButton;
 
 class FbBotApp
 {
@@ -99,14 +98,14 @@ class FbBotApp
     /**
      * Set Greeting Message
      *
-     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/greeting-text
-     * @param string $greetingText
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text
+     * @param array $localizedGreetings
      * @return array
      */
-    public function setGreetingText($greetingText){
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'greeting',
-            'greeting' => ['text' => $greetingText]
+    public function setGreetingText($localizedGreetings){
+        //var_dump($localizedGreetings);
+        return $this->call('me/messenger_profile', [
+            'greeting' => $localizedGreetings
         ], self::TYPE_POST);
     }
     
@@ -114,16 +113,28 @@ class FbBotApp
     /**
      * Delete Greeting Text
      *
-     * @see https://developers.facebook.com/docs/messenger-platform/thread-settings/greeting-text
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text
      * @return array
      */
     public function deleteGreetingText()
     {
-        return $this->call('me/thread_settings', [
-            'setting_type' => 'greeting'
-        ], self::TYPE_DELETE);
+        return $this->call('me/messenger_profile', [
+            'fields' => ['greeting'],
+        ], self::TYPE_DELETE); 
     }
     
+    /**
+     * Get Greeting Text
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text
+     * @return array
+     */
+    public function getGreetingText(){
+        return $this->call('me/messenger_profile', [
+            'fields' => 'greeting',
+        ], self::TYPE_GET); 
+    }
+
     
     /**
      * Set Nested Menu
