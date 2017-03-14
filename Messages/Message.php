@@ -21,16 +21,21 @@ class Message
     protected $text = null;
 
     /**
+     * @var bool
+     */
+    protected $user_ref = false;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
      * @param string $text
      */
-    public function __construct($recipient, $text)
+    public function __construct($recipient, $text, $user_ref = false)
     {
         $this->recipient = $recipient;
         $this->text = $text;
-
+        $this->user_ref = $user_ref;
     }
 
     /**
@@ -41,9 +46,7 @@ class Message
     public function getData()
     {
         return [
-            'recipient' =>  [
-                'id' => $this->recipient
-            ],
+            'recipient' => $this->user_ref ? ['user_ref' => $this->recipient] : ['id' => $this->recipient],
             'message' => [
                 'text' => $this->text
             ]
