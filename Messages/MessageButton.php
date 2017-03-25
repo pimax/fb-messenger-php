@@ -19,9 +19,14 @@ class MessageButton
     const TYPE_POSTBACK = "postback";
     
     /**
-     * Postback button type
+     * Element share type
      */
     const TYPE_SHARE = "element_share";
+
+    /**
+     * Element share type
+     */
+    const TYPE_CALL = "phone_number";
     
     /**
      * Account link type
