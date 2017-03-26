@@ -18,7 +18,7 @@ class StructuredMessage extends Message
      * Structured message generic type
      */
     const TYPE_GENERIC = "generic";
-    
+
     /**
      * Structured message list type
      */
@@ -98,12 +98,17 @@ class StructuredMessage extends Message
      * @var array
      */
     protected $adjustments = [];
-    
+
     /**
      * @var string
      */
     protected $top_element_style = 'large';
-    
+
+    /**
+     * @var string
+     */
+    protected $quick_replies = null;
+
 
     /**
      * StructuredMessage constructor.
@@ -112,10 +117,11 @@ class StructuredMessage extends Message
      * @param string $type
      * @param array  $data
      */
-    public function __construct($recipient, $type, $data)
+    public function __construct($recipient, $type, $data, $quick_replies)
     {
         $this->recipient = $recipient;
         $this->type = $type;
+        $this->quick_replies = $quick_replies;
 
         switch ($type)
         {
@@ -127,7 +133,7 @@ class StructuredMessage extends Message
             case self::TYPE_GENERIC:
                 $this->elements = $data['elements'];
             break;
-        
+
             case self::TYPE_LIST:
                 $this->elements = $data['elements'];
                 //allowed is a sinle button for the whole list
@@ -177,6 +183,10 @@ class StructuredMessage extends Message
             ]
         ];
 
+        foreach ($this->quick_replies as $qr) {
+            $result['quick_replies'][] = $qr->getData();
+        }
+
         switch ($this->type)
         {
             case self::TYPE_BUTTON:
@@ -196,7 +206,7 @@ class StructuredMessage extends Message
                     $result['attachment']['payload']['elements'][] = $btn->getData();
                 }
             break;
-            
+
             case self::TYPE_LIST:
                 $result['attachment']['payload']['elements'] = [];
                 $result['attachment']['payload']['top_element_style'] = $this->top_element_style;

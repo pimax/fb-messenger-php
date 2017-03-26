@@ -30,8 +30,9 @@ class ImageMessage extends Message
      *
      * @param string $recipient
      * @param string $file Web Url or local file with @ prefix
-     * @param $quick_replies - array of array("content_type","title","payload"),..,..
+     * @param array $quick_replies array of array to be added after attachment
      */
+     
     public function __construct($recipient, $file, $quick_replies = null)
     {
         $this->recipient = $recipient;
@@ -49,11 +50,10 @@ class ImageMessage extends Message
         $res = [
             'recipient' =>  [
                 'id' => $this->recipient
-            ],
-            'quick_replies' => $this->quick_replies
+            ]
         ];
 
-        $attachment = new Attachment(Attachment::TYPE_IMAGE);
+        $attachment = new Attachment(Attachment::TYPE_IMAGE, [], $this->quick_replies);
 
         if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
