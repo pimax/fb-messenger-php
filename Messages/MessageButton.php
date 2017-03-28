@@ -17,17 +17,22 @@ class MessageButton
      * Postback button type
      */
     const TYPE_POSTBACK = "postback";
-    
+
+    /**
+     * Call button type
+     */
+    const TYPE_CALL = "phone_number";
+
     /**
      * Postback button type
      */
     const TYPE_SHARE = "element_share";
-    
+
     /**
      * Account link type
      */
     const TYPE_ACCOUNT_LINK = "account_link";
-  
+
     /**
      * Account unlink type
      */
@@ -53,7 +58,7 @@ class MessageButton
      * @var null|string
      */
     protected $url = null;
-    
+
     /**
      * Webview height ratio ("compact", "tall" or "full")
      *
@@ -76,20 +81,29 @@ class MessageButton
     protected $fallback_url = null;
 
     /**
+     * Specify a different Message than the message the "Share" button is attached to
+     *
+     * @var null|array
+     */
+    protected $share_contents = null;
+
+
+    /**
      * MessageButton constructor.
      *
      * @param string $type
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '')
+    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $share_contents = null)
     {
         $this->type = $type;
         $this->title = $title;
-        
+
         $this->webview_height_ratio = $webview_height_ratio;
         $this->messenger_extensions = $messenger_extensions;
         $this->fallback_url = $fallback_url;
+        $this->share_contents = $share_contents;
 
         if (!$url) {
             $url = $title;
@@ -100,7 +114,7 @@ class MessageButton
 
     /**
      * Get Button data
-     * 
+     *
      * @return array
      */
     public function getData()
@@ -116,31 +130,39 @@ class MessageButton
                 $result['title'] = $this->title;
             break;
 
+            case self::TYPE_CALL:
+                $result['payload'] = $this->url;
+                $result['title'] = $this->title;
+            break;
+
             case self::TYPE_WEB:
               $result['title'] = $this->title;
               $result['url'] = $this->url;
-                
+
               if ($this->webview_height_ratio) {
                   $result['webview_height_ratio'] = $this->webview_height_ratio;
               }
-              
+
               if ($this->messenger_extensions){
                   $result['messenger_extensions'] = $this->messenger_extensions;
                   $result['fallback_url'] = $this->fallback_url;
               }
             break;
-          
+
+            case self::TYPE_SHARE:
+              //only share_contents needed
+               if ($this->share_contents)
+                $result['share_contents'] = $this->share_contents->getData();
+            break;
+
             case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
             break;
-           
+
             case self::TYPE_ACCOUNT_UNLINK:
               //only type needed
             break;
-            
-            case self::TYPE_SHARE:
-              //only type needed  
-            break;
+
         }
 
         return $result;
