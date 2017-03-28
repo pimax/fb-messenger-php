@@ -117,7 +117,7 @@ class StructuredMessage extends Message
      * @param string $type
      * @param array  $data
      */
-    public function __construct($recipient, $type, $data, $quick_replies)
+    public function __construct($recipient, $type, $data, $quick_replies=array())
     {
         $this->recipient = $recipient;
         $this->type = $type;

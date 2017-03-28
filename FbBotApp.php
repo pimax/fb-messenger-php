@@ -10,7 +10,7 @@ class FbBotApp
      * Request type GET
      */
     const TYPE_GET = "get";
-    
+
     /**
      * Request type POST
      */
@@ -20,14 +20,14 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
-    
+
     /**
      * FB Messenger API Url
      *
      * @var string
      */
     protected $apiUrl = 'https://graph.facebook.com/v2.6/';
-    
+
     /**
      * @var null|string
      */
@@ -80,7 +80,7 @@ class FbBotApp
             'get_started' => ['payload' => $payload]
         ], self::TYPE_POST);
     }
-    
+
     /**
      * Delete Get Started Button
      *
@@ -91,10 +91,10 @@ class FbBotApp
     {
         return $this->call('me/messenger_profile', [
             'fields' => ['get_started'],
-        ], self::TYPE_DELETE); 
+        ], self::TYPE_DELETE);
     }
-    
-    
+
+
     /**
      * Set Greeting Message
      *
@@ -107,8 +107,8 @@ class FbBotApp
             'greeting' => $localizedGreetings
         ], self::TYPE_POST);
     }
-    
-    
+
+
     /**
      * Delete Greeting Text
      *
@@ -119,9 +119,9 @@ class FbBotApp
     {
         return $this->call('me/messenger_profile', [
             'fields' => ['greeting'],
-        ], self::TYPE_DELETE); 
+        ], self::TYPE_DELETE);
     }
-    
+
     /**
      * Get Greeting Text
      *
@@ -131,30 +131,31 @@ class FbBotApp
     public function getGreetingText(){
         return $this->call('me/messenger_profile', [
             'fields' => 'greeting',
-        ], self::TYPE_GET); 
+        ], self::TYPE_GET);
     }
 
-    
+
     /**
      * Set Nested Menu
      *
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
-     * @param Menu\LocalizedMenu[] $localizedMenu
+     * @params $localizedMenu
      * @return array
      */
     public function setPersistentMenu($localizedMenu)
     {
+
         $elements = [];
 
         foreach ($localizedMenu as $menu) {
             $elements[] = $menu->getData();
         }
-        
+
         return $this->call('me/messenger_profile', [
             'persistent_menu' => $elements
         ], self::TYPE_POST);
     }
-    
+
     /**
      * Remove Persistent Menu
      *
@@ -193,7 +194,7 @@ class FbBotApp
         curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
-        
+
         if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
             curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));

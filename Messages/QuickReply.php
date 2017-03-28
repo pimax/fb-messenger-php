@@ -25,17 +25,19 @@ class QuickReply extends Message{
         parent::__construct($recipient,$text);
     }
     public function getData() {
-        return [
+        $result = [
             'recipient' =>  [
                 'id' => $this->recipient
             ],
             'message' => [
-                'text' => $this->text,
-                'quick_replies'=>$this->quick_replies
+                'text' => $this->text
             ]
         ];
 
-        
+        foreach ($this->quick_replies as $qr) {
+            $result['message']['quick_replies'][] = $qr->getData();
+        }
+
+        return $result;
     }
 }
-
