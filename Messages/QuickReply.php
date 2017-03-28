@@ -10,7 +10,7 @@ class QuickReply extends Message{
     /**
      * @var array
      */
-    protected $quick_replies = null;
+    protected $quick_replies = array();
 
     /**
      * Message constructor.
@@ -19,7 +19,7 @@ class QuickReply extends Message{
      * @param $text - string
      * @param $quick_replies - array of array("content_type","title","payload"),..,..
      */
-    public function __construct($recipient, $text, $quick_replies)
+    public function __construct($recipient, $text, $quick_replies = array())
     {
         $this->quick_replies = $quick_replies;
         parent::__construct($recipient,$text);

@@ -38,7 +38,7 @@ class Attachment
      * @param string $type
      * @param array  $payload
      */
-    public function __construct($type, $payload = array(), $quick_replies=null)
+    public function __construct($type, $payload = array(), $quick_replies = array())
     {
         $this->type = $type;
         $this->payload = $payload;

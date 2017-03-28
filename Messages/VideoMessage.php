@@ -27,7 +27,7 @@ class VideoMessage extends Message
      * @param string $file Web Url or local file with @ prefix
      * @param array $quick_replies array of array to be added after attachment
      */
-     public function __construct($recipient, $file, $quick_replies = null)
+     public function __construct($recipient, $file, $quick_replies = array())
      {
          $this->recipient = $recipient;
          $this->text = $file;
