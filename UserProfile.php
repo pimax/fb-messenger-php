@@ -25,7 +25,24 @@ class UserProfile
     {
         return isset($this->data['profile_pic']) ? $this->data['profile_pic'] : null;
     }
+    
+    public function getFBID()
+    {
+    
+        $ProfileImagevars = preg_split("#/#", $this->data['profile_pic']); 
 
+        foreach ($ProfileImagevars as &$value) {
+            if (strpos($value, '.jpg') !== false) {
+                $JPGPart = $value;
+                break;
+            }
+        }
+
+        $JPGPartsplit = preg_split("#_#",$JPGPart); 
+        $FacebookID = $JPGPartsplit[1] ;
+        return isset($FacebookID) ? $FacebookID : null;
+ 
+    }
     public function getLocale()
     {
         return isset($this->data['locale']) ? $this->data['locale'] : null;
@@ -37,7 +54,7 @@ class UserProfile
     }
 
     public function getGender()
-    {
+    { 
         return isset($this->data['gender']) ? $this->data['gender'] : null;
     }
 }
