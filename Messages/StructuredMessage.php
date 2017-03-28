@@ -105,9 +105,9 @@ class StructuredMessage extends Message
     protected $top_element_style = 'large';
 
     /**
-     * @var string
+     * @var array
      */
-    protected $quick_replies = null;
+    protected $quick_replies = [];
 
 
     /**
@@ -117,7 +117,7 @@ class StructuredMessage extends Message
      * @param string $type
      * @param array  $data
      */
-    public function __construct($recipient, $type, $data, $quick_replies)
+    public function __construct($recipient, $type, $data, $quick_replies = array())
     {
         $this->recipient = $recipient;
         $this->type = $type;

@@ -40,4 +40,14 @@ class UserProfile
     {
         return isset($this->data['gender']) ? $this->data['gender'] : null;
     }
+
+    /**
+     * Get Data
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }

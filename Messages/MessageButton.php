@@ -24,7 +24,7 @@ class MessageButton
     const TYPE_CALL = "phone_number";
 
     /**
-     * Postback button type
+     * Share button type
      */
     const TYPE_SHARE = "element_share";
 
@@ -126,13 +126,13 @@ class MessageButton
         switch($this->type)
         {
             case self::TYPE_POSTBACK:
-                $result['payload'] = $this->url;
                 $result['title'] = $this->title;
+                $result['payload'] = $this->url;
             break;
 
             case self::TYPE_CALL:
-                $result['payload'] = $this->url;
                 $result['title'] = $this->title;
+                $result['payload'] = $this->url;
             break;
 
             case self::TYPE_WEB:
