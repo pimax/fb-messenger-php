@@ -49,7 +49,9 @@ class AudioMessage extends Message
 
         $attachment = new Attachment(Attachment::TYPE_AUDIO, [], $this->quick_replies);
 
-        if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
+        if (intval($this->text) == $this->text) {
+            $attachment->setPayload(array('attachment_id' => $this->text));
+        } elseif (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
         } else {
             $attachment->setFileData($this->getCurlValue($this->text, mime_content_type($this->text), basename($this->text)));

@@ -55,7 +55,10 @@ class ImageMessage extends Message
 
         $attachment = new Attachment(Attachment::TYPE_IMAGE, [], $this->quick_replies);
 
-        if (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
+        if (intval($this->text) == $this->text) {
+            $attachment->setPayload(array('attachment_id' => $this->text));
+            $res['message'] = $attachment->getData();
+        } elseif (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
             $res['message'] = $attachment->getData();
         } else {
