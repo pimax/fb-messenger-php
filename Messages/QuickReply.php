@@ -35,7 +35,11 @@ class QuickReply extends Message{
         ];
 
         foreach ($this->quick_replies as $qr) {
-            $result['message']['quick_replies'][] = $qr->getData();
+            if($qr instanceof QuickReplyButton){
+                $result['message']['quick_replies'][] = $qr->getData();
+            } else {
+                $result['message']['quick_replies'][] = $qr;
+            }
         }
 
         return $result;
