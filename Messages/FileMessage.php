@@ -49,7 +49,7 @@ class FileMessage extends Message
 
         $attachment = new Attachment(Attachment::TYPE_FILE, [], $this->quick_replies);
         
-        if (intval($this->text) == $this->text) {
+        if (strcmp(intval($this->text), $this->text) === 0) {
             $attachment->setPayload(array('attachment_id' => $this->text));
         } elseif (strpos($this->text, 'http://') === 0 || strpos($this->text, 'https://') === 0) {
             $attachment->setPayload(array('url' => $this->text));
