@@ -52,6 +52,22 @@ class FbBotApp
     {
         return $this->call('me/messages', $message->getData());
     }
+    
+    /**
+     * Upload File (image, audio, video, file)
+     *
+     * @see Attachment Reuse on https://developers.facebook.com/docs/messenger-platform/send-api-reference
+     * @param Messages\Attachment $attachment
+     * @return array contains attachment_id (if successfully uploaded).
+     */
+    public function upload($attachment)
+    {
+        $data = $attachment->getData();
+        $data['attachment']['payload']['is_reusable'] = true;
+        return $this->call('me/message_attachments',[
+            'message' => $data
+        ], self::TYPE_POST);
+    }
 
     /**
      * Get User Profile Info
