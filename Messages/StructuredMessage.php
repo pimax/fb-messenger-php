@@ -30,6 +30,16 @@ class StructuredMessage extends Message
     const TYPE_RECEIPT = "receipt";
 
     /**
+     * Generic message horizontal image aspect ratio
+     */
+    const IMAGE_ASPECT_RATIO_HORIZONTAL = "horizontal";
+
+    /**
+     * Generic message square image aspect ratio
+     */
+    const IMAGE_ASPECT_RATIO_SQUARE = "square";
+
+    /**
      * @var null|string
      */
     protected $type = null;
@@ -105,6 +115,11 @@ class StructuredMessage extends Message
     protected $top_element_style = 'large';
 
     /**
+     * @var string
+     */
+    protected $image_aspect_ratio = self::IMAGE_ASPECT_RATIO_HORIZONTAL;
+
+    /**
      * @var array
      */
     protected $quick_replies = [];
@@ -128,11 +143,16 @@ class StructuredMessage extends Message
             case self::TYPE_BUTTON:
                 $this->title = $data['text'];
                 $this->buttons = $data['buttons'];
-            break;
+                break;
 
             case self::TYPE_GENERIC:
                 $this->elements = $data['elements'];
-            break;
+                //aspect ratio used to render images specified by image_url in element objects
+                //default is horizontal
+                if(isset($data['image_aspect_ratio'])) {
+                    $this->image_aspect_ratio = $data['image_aspect_ratio'];
+                }
+                break;
 
             case self::TYPE_LIST:
                 $this->elements = $data['elements'];
@@ -150,7 +170,7 @@ class StructuredMessage extends Message
                     $message = 'Facbook require the image_url to be set for the first element if the top_element_style is large. set the image_url or change the top_element_style to compact.';
                     throw new \Exception($message);
                 }
-            break;
+                break;
 
             case self::TYPE_RECEIPT:
                 $this->recipient_name = $data['recipient_name'];
@@ -163,7 +183,7 @@ class StructuredMessage extends Message
                 $this->address = $data['address'];
                 $this->summary = $data['summary'];
                 $this->adjustments = $data['adjustments'];
-            break;
+                break;
         }
     }
 
@@ -197,15 +217,16 @@ class StructuredMessage extends Message
                     $result['attachment']['payload']['buttons'][] = $btn->getData();
                 }
 
-            break;
+                break;
 
             case self::TYPE_GENERIC:
                 $result['attachment']['payload']['elements'] = [];
+                $result['attachment']['payload']['image_aspect_ratio'] = $this->image_aspect_ratio;
 
                 foreach ($this->elements as $btn) {
                     $result['attachment']['payload']['elements'][] = $btn->getData();
                 }
-            break;
+                break;
 
             case self::TYPE_LIST:
                 $result['attachment']['payload']['elements'] = [];
@@ -218,7 +239,7 @@ class StructuredMessage extends Message
                 foreach ($this->buttons as $btn) {
                     $result['attachment']['payload']['buttons'][] = $btn->getData();
                 }
-            break;
+                break;
 
             case self::TYPE_RECEIPT:
                 $result['attachment']['payload']['recipient_name'] = $this->recipient_name;
@@ -240,7 +261,7 @@ class StructuredMessage extends Message
                 foreach ($this->adjustments as $btn) {
                     $result['attachment']['payload']['adjustments'][] = $btn->getData();
                 }
-            break;
+                break;
         }
 
         return [
