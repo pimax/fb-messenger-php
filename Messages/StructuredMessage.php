@@ -30,6 +30,16 @@ class StructuredMessage extends Message
     const TYPE_RECEIPT = "receipt";
 
     /**
+     * Generic message horizontal image aspect ratio
+     */
+    const IMAGE_ASPECT_RATIO_HORIZONTAL = "horizontal";
+
+    /**
+     * Generic message square image aspect ratio
+     */
+    const IMAGE_ASPECT_RATIO_SQUARE = "square";
+
+    /**
      * @var null|string
      */
     protected $type = null;
@@ -105,6 +115,11 @@ class StructuredMessage extends Message
     protected $top_element_style = 'large';
 
     /**
+     * @var string
+     */
+    protected $image_aspect_ratio = self::IMAGE_ASPECT_RATIO_HORIZONTAL;
+
+    /**
      * @var array
      */
     protected $quick_replies = [];
@@ -132,6 +147,11 @@ class StructuredMessage extends Message
 
             case self::TYPE_GENERIC:
                 $this->elements = $data['elements'];
+                //aspect ratio used to render images specified by image_url in element objects
+                //default is horizontal
+                if(isset($data['image_aspect_ratio'])) {
+                    $this->image_aspect_ratio = $data['image_aspect_ratio'];
+                }
             break;
 
             case self::TYPE_LIST:
@@ -201,6 +221,7 @@ class StructuredMessage extends Message
 
             case self::TYPE_GENERIC:
                 $result['attachment']['payload']['elements'] = [];
+                $result['attachment']['payload']['image_aspect_ratio'] = $this->image_aspect_ratio;
 
                 foreach ($this->elements as $btn) {
                     $result['attachment']['payload']['elements'][] = $btn->getData();
