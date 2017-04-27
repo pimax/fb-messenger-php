@@ -52,7 +52,7 @@ class FbBotApp
     {
         return $this->call('me/messages', $message->getData());
     }
-    
+
     /**
      * Upload File (image, audio, video, file)
      *
@@ -150,6 +150,58 @@ class FbBotApp
         ], self::TYPE_GET);
     }
 
+    /**
+         * Set Target Audience
+         *
+         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+         * @param string $audience_type ("all", "custom", "none")
+         * @param string $list_type ("whitelist", "blacklist")
+         * @param array $countries_array
+         * @return array
+         */
+        public function setTargetAudience($audience_type, $list_type=null, $countries_array=null){
+
+            if ($audience_type === "custom") {
+                return $this->call('me/messenger_profile', [
+                    'target_audience' => [
+                       'audience_type' => $audience_type,
+                       $list_type => $countries_array
+                   ]
+                ], self::TYPE_POST);
+            } else {
+                return $this->call('me/messenger_profile', [
+                    'target_audience' => [
+                       'audience_type' => $audience_type
+                   ]
+                ], self::TYPE_POST);
+            }
+        }
+
+
+        /**
+         * Delete Target Audience
+         *
+         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+         * @return array
+         */
+        public function deleteTargetAudience()
+        {
+            return $this->call('me/messenger_profile', [
+                'fields' => ['target_audience'],
+            ], self::TYPE_DELETE);
+        }
+
+        /**
+         * Get Target Audience
+         *
+         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+         * @return array
+         */
+        public function getTargetAudience(){
+            return $this->call('me/messenger_profile', [
+                'fields' => 'target_audience',
+            ], self::TYPE_GET);
+        }
 
     /**
      * Set Nested Menu
