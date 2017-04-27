@@ -131,12 +131,14 @@ class StructuredMessage extends Message
      * @param string $recipient
      * @param string $type
      * @param array  $data
+     * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
      */
-    public function __construct($recipient, $type, $data, $quick_replies = array())
-    {
-        $this->recipient = $recipient;
-        $this->type = $type;
-        $this->quick_replies = $quick_replies;
+     public function __construct($recipient, $type, $data, $quick_replies = array(), $tag = null)
+     {
+         $this->recipient = $recipient;
+         $this->type = $type;
+         $this->quick_replies = $quick_replies;
+         $this->tag = $tag;
 
         switch ($type)
         {
@@ -268,7 +270,8 @@ class StructuredMessage extends Message
             'recipient' =>  [
                 'id' => $this->recipient
             ],
-            'message' => $result
+            'message' => $result,
+            'tag' => $this->tag
         ];
     }
 }

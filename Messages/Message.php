@@ -30,12 +30,14 @@ class Message
      *
      * @param string $recipient
      * @param string $text
+     * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
      */
-    public function __construct($recipient, $text, $user_ref = false)
+    public function __construct($recipient, $text, $user_ref = false, $tag = null)
     {
         $this->recipient = $recipient;
         $this->text = $text;
         $this->user_ref = $user_ref;
+        $this->tag = $tag;
     }
 
     /**
@@ -49,7 +51,8 @@ class Message
             'recipient' => $this->user_ref ? ['user_ref' => $this->recipient] : ['id' => $this->recipient],
             'message' => [
                 'text' => $this->text
-            ]
+            ],
+            'tag'=> $this->tag
         ];
     }
 

@@ -17,11 +17,13 @@ class QuickReply extends Message{
      *
      * @param $recipient
      * @param $text - string
-     * @param $quick_replies - array of array("content_type","title","payload"),..,..
+     * @param array $quick_replies - array of array("content_type","title","payload"),..,..
+     * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
      */
-    public function __construct($recipient, $text, $quick_replies = array())
+    public function __construct($recipient, $text, $quick_replies = array(), $tag = null)
     {
         $this->quick_replies = $quick_replies;
+        $this->tag = $tag;
         parent::__construct($recipient,$text);
     }
     public function getData() {
@@ -31,7 +33,8 @@ class QuickReply extends Message{
             ],
             'message' => [
                 'text' => $this->text
-            ]
+            ],
+            'tag'=> $this->tag
         ];
 
         foreach ($this->quick_replies as $qr) {
