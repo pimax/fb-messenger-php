@@ -31,6 +31,7 @@ class Message
      * @param string $recipient
      * @param string $text
      * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
+     * https://developers.facebook.com/docs/messenger-platform/send-api-reference/tags
      */
     public function __construct($recipient, $text, $user_ref = false, $tag = null)
     {

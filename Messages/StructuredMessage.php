@@ -132,6 +132,7 @@ class StructuredMessage extends Message
      * @param string $type
      * @param array  $data
      * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
+     * https://developers.facebook.com/docs/messenger-platform/send-api-reference/tags
      */
      public function __construct($recipient, $type, $data, $quick_replies = array(), $tag = null)
      {
