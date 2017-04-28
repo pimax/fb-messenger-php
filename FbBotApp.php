@@ -151,57 +151,98 @@ class FbBotApp
     }
 
     /**
-         * Set Target Audience
-         *
-         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
-         * @param string $audience_type ("all", "custom", "none")
-         * @param string $list_type ("whitelist", "blacklist")
-         * @param array $countries_array
-         * @return array
-         */
-        public function setTargetAudience($audience_type, $list_type=null, $countries_array=null){
+     * Set Target Audience
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+     * @param string $audience_type ("all", "custom", "none")
+     * @param string $list_type ("whitelist", "blacklist")
+     * @param array $countries_array
+     * @return array
+     */
+    public function setTargetAudience($audience_type, $list_type=null, $countries_array=null){
 
-            if ($audience_type === "custom") {
-                return $this->call('me/messenger_profile', [
-                    'target_audience' => [
-                       'audience_type' => $audience_type,
-                       $list_type => $countries_array
-                   ]
-                ], self::TYPE_POST);
-            } else {
-                return $this->call('me/messenger_profile', [
-                    'target_audience' => [
-                       'audience_type' => $audience_type
-                   ]
-                ], self::TYPE_POST);
-            }
-        }
-
-
-        /**
-         * Delete Target Audience
-         *
-         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
-         * @return array
-         */
-        public function deleteTargetAudience()
-        {
+        if ($audience_type === "custom") {
             return $this->call('me/messenger_profile', [
-                'fields' => ['target_audience'],
-            ], self::TYPE_DELETE);
-        }
-
-        /**
-         * Get Target Audience
-         *
-         * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
-         * @return array
-         */
-        public function getTargetAudience(){
+                'target_audience' => [
+                   'audience_type' => $audience_type,
+                   $list_type => $countries_array
+               ]
+            ], self::TYPE_POST);
+        } else {
             return $this->call('me/messenger_profile', [
-                'fields' => 'target_audience',
-            ], self::TYPE_GET);
+                'target_audience' => [
+                   'audience_type' => $audience_type
+               ]
+            ], self::TYPE_POST);
         }
+    }
+
+    /**
+     * Delete Target Audience
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+     * @return array
+     */
+    public function deleteTargetAudience()
+    {
+        return $this->call('me/messenger_profile', [
+            'fields' => ['target_audience'],
+        ], self::TYPE_DELETE);
+    }
+
+    /**
+     * Get Target Audience
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
+     * @return array
+     */
+    public function getTargetAudience(){
+        return $this->call('me/messenger_profile', [
+            'fields' => 'target_audience',
+        ], self::TYPE_GET);
+    }
+
+    /**
+     * Set Domain Whitelisting
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
+     * @param array|string $domains
+     * @return array
+     */
+    public function setDomainWhitelisting($domains){
+
+        if(!is_array($domains))
+            $domains = array($domains);
+
+        return $this->call('me/messenger_profile', [
+            'whitelisted_domains' => $domains
+        ], self::TYPE_POST);
+    }
+
+    /**
+     * Delete Domain Whitelisting
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
+     * @return array
+     */
+    public function deleteDomainWhitelisting()
+    {
+        return $this->call('me/messenger_profile', [
+            'fields' => ['whitelisted_domains'],
+        ], self::TYPE_DELETE);
+    }
+
+    /**
+     * Get Domain Whitelisting
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
+     * @return array
+     */
+    public function getDomainWhitelisting(){
+        return $this->call('me/messenger_profile', [
+            'fields' => 'whitelisted_domains',
+        ], self::TYPE_GET);
+    }
 
     /**
      * Set Nested Menu
@@ -212,7 +253,6 @@ class FbBotApp
      */
     public function setPersistentMenu($localizedMenu)
     {
-
         $elements = [];
 
         foreach ($localizedMenu as $menu) {
