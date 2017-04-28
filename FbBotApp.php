@@ -209,7 +209,7 @@ class FbBotApp
      * @param array|string $domains
      * @return array
      */
-    public function setDomainWhitelisting($domains){
+    public function setDomainWhitelist($domains){
 
         if(!is_array($domains))
             $domains = array($domains);
@@ -225,7 +225,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
      * @return array
      */
-    public function deleteDomainWhitelisting()
+    public function deleteDomainWhitelist()
     {
         return $this->call('me/messenger_profile', [
             'fields' => ['whitelisted_domains'],
@@ -238,7 +238,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
      * @return array
      */
-    public function getDomainWhitelisting(){
+    public function getDomainWhitelist(){
         return $this->call('me/messenger_profile', [
             'fields' => 'whitelisted_domains',
         ], self::TYPE_GET);
