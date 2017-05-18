@@ -243,6 +243,52 @@ class FbBotApp
             'fields' => 'whitelisted_domains',
         ], self::TYPE_GET);
     }
+    
+    /**
+     * Set Chat Extension Home URL
+     * 
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
+     * @param string  $url
+     * @param string  $webview_height_ratio
+     * @param string  $webview_share_button
+     * @param boolean $in_test
+     * @return array
+     */
+    public function setHomeUrl($url, $webview_height_ratio = 'tall', $webview_share_button = 'hide', $in_test = false){
+        return $this->call('me/messenger_profile', [
+            'home_url' => [
+                'url' => $url,
+                'webview_height_ratio' => $webview_height_ratio,
+                'webview_share_button' => $webview_share_button,
+                'in_test' => $in_test
+            ]
+        ], self::TYPE_POST);
+    }
+    
+    /**
+     * Delete Chat Extension Home Url
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
+     * @return array
+     */
+    public function deleteHomeUrl()
+    {
+        return $this->call('me/messenger_profile', [
+            'fields' => ['home_url'],
+        ], self::TYPE_DELETE);
+    }
+    
+    /**
+     * Get Chat Extension Home Url
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
+     * @return array
+     */
+    public function getHomeUrl(){
+        return $this->call('me/messenger_profile', [
+            'fields' => 'home_url',
+        ], self::TYPE_GET);
+    }
 
     /**
      * Set Nested Menu
