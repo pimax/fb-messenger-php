@@ -48,10 +48,36 @@ class FbBotApp
      * @param Message $message
      * @return array
      */
-    public function send($message)
-    {
-        return $this->call('me/messages', $message->getData());
-    }
+     public function send($message)
+     {
+         $maxlength = 640;
+
+         //CHECK LENGTH OF TEXT FIRST + MAYBE SEND MULTIPLE MESSAGES
+         $data = $message->getData();
+
+         if ( isset($data['message']['text']) && strlen(utf8_decode($data['message']['text'])) > $maxlength ) {
+
+             $message_text = $data['message']['text'];
+
+             $pages = ceil( strlen(utf8_decode($message_text)) / $maxlength );
+
+             for ($x=0; $x<$pages; $x++) {
+
+                 $text = substr( $message_text, $x*$maxlength, ($x+1)*$maxlength );
+
+                 $data['message']['text'] = $text;
+
+                 $res = $this->call('me/messages', $data);
+             }
+
+             return $res;
+
+         } else {
+
+             return $this->call('me/messages', $data);
+
+         }
+     }
 
     /**
      * Upload File (image, audio, video, file)
@@ -243,10 +269,10 @@ class FbBotApp
             'fields' => 'whitelisted_domains',
         ], self::TYPE_GET);
     }
-    
+
     /**
      * Set Chat Extension Home URL
-     * 
+     *
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
      * @param string  $url
      * @param string  $webview_height_ratio
@@ -264,7 +290,7 @@ class FbBotApp
             ]
         ], self::TYPE_POST);
     }
-    
+
     /**
      * Delete Chat Extension Home Url
      *
@@ -277,7 +303,7 @@ class FbBotApp
             'fields' => ['home_url'],
         ], self::TYPE_DELETE);
     }
-    
+
     /**
      * Get Chat Extension Home Url
      *
