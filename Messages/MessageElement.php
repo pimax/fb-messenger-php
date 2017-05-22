@@ -46,6 +46,13 @@ class MessageElement
     protected $buttons = [];
 
     /**
+     * Default Action
+     *
+     * @var array
+     */
+    protected $default_action = [];
+
+    /**
      * MessageElement constructor.
      *
      * @param string $title
@@ -53,13 +60,14 @@ class MessageElement
      * @param string $image_url
      * @param array  $buttons
      */
-    public function __construct($title, $subtitle, $image_url = '', $buttons = [], $url = '')
+    public function __construct($title, $subtitle, $image_url = '', $buttons = [], $url = '', $default_action = [])
     {
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->url = $url;
         $this->image_url = $image_url;
         $this->buttons = $buttons;
+        $this->default_action = $default_action;
     }
 
     /**
@@ -74,6 +82,7 @@ class MessageElement
             'subtitle' => $this->subtitle,
             'item_url' => $this->url,
             'image_url' => $this->image_url,
+            'default_action' => $this->default_action
         ];
 
         if (!empty($this->buttons)) {
