@@ -26,19 +26,27 @@ class Message
     protected $user_ref = false;
 
     /**
+     * @var null|string
+     */
+    protected $notification_type = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
      * @param string $text
      * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference/tags
+     * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
+     * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
-    public function __construct($recipient, $text, $user_ref = false, $tag = null)
+    public function __construct($recipient, $text, $user_ref = false, $tag = null, $notification_type = "REGULAR")
     {
         $this->recipient = $recipient;
         $this->text = $text;
         $this->user_ref = $user_ref;
         $this->tag = $tag;
+        $this->notification_type = $notification_type;
     }
 
     /**
@@ -53,7 +61,8 @@ class Message
             'message' => [
                 'text' => $this->text
             ],
-            'tag'=> $this->tag
+            'tag'=> $this->tag,
+            'notification_type'=> $this->notification_type
         ];
     }
 
