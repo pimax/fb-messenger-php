@@ -22,10 +22,12 @@ class QuickReply extends Message{
      */
     public function __construct($recipient, $text, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR)
     {
+        $this->recipient = $recipient;
+        $this->text = $text;
         $this->quick_replies = $quick_replies;
         $this->tag = $tag;
         $this->notification_type = $notification_type;
-        parent::__construct($recipient,$text);
+        //parent::__construct($recipient,$text);
     }
     public function getData() {
         $result = [

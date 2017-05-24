@@ -47,7 +47,8 @@ class FileMessage extends Message
         $res = [
             'recipient' =>  [
                 'id' => $this->recipient
-            ]
+            ],
+            'notification_type'=> $this->notification_type
         ];
 
         $attachment = new Attachment(Attachment::TYPE_FILE, [], $this->quick_replies);
