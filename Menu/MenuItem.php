@@ -79,7 +79,7 @@ class MenuItem
      * @param string $title
      * @param string $url url or postback
      */
-    public function __construct($type, $title, $data, $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $webview_share_button =  '')
+    public function __construct($type, $title, $data, $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $webview_share_button =  null)
     {
         $this->type = $type;
         $this->title = $title;
@@ -110,7 +110,7 @@ class MenuItem
 
             case self::TYPE_WEB:
               $result['url'] = $this->data;
-                
+              
               if ($this->webview_height_ratio) {
                   $result['webview_height_ratio'] = $this->webview_height_ratio;
               }
@@ -118,6 +118,10 @@ class MenuItem
               if ($this->messenger_extensions){
                   $result['messenger_extensions'] = $this->messenger_extensions;
                   $result['fallback_url'] = $this->fallback_url;
+              }
+              
+              if($this->webview_share_button){
+                  $result['webview_share_button'] = $this->webview_share_button;
               }
             break;
             
