@@ -3,7 +3,7 @@
 namespace pimax\Messages;
 
 /**
- * Class MessageButton
+ * Class MessageDefaultAction
  * @package pimax\Messages
  */
 class MessageDefaultAction

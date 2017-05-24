@@ -10,34 +10,37 @@ namespace pimax\Messages;
  */
 class ImageMessage extends Message
 {
-    /**
-     * @var null|string
-     */
-    protected $recipient = null;
+    // /**
+    //  * @var null|string
+    //  */
+    // protected $recipient = null;
+    //
+    // /**
+    //  * @var null|string
+    //  */
+    // protected $text = null;
 
-    /**
-     * @var null|string
-     */
-    protected $text = null;
-
-    /**
-     * @var null|array
-     */
-    protected $quick_replies = null;
+    // /**
+    //  * @var null|array
+    //  */
+    // protected $quick_replies = null;
 
     /**
      * Message constructor.
      *
      * @param string $recipient
-     * @param string $file Web Url or local file with @ prefix
+     * @param string $file Web Url, local file with @ prefix, attachment_id
      * @param array $quick_replies array of array to be added after attachment
+     * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
+     * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
 
-    public function __construct($recipient, $file, $quick_replies = array())
+    public function __construct($recipient, $file, $quick_replies = array(), $notification_type = parent::NOTIFY_REGULAR)
     {
         $this->recipient = $recipient;
         $this->text = $file;
         $this->quick_replies = $quick_replies;
+        $this->notification_type = $notification_type;
     }
 
     /**
@@ -50,7 +53,8 @@ class ImageMessage extends Message
         $res = [
             'recipient' =>  [
                 'id' => $this->recipient
-            ]
+            ],
+            'notification_type'=> $this->notification_type
         ];
 
         $attachment = new Attachment(Attachment::TYPE_IMAGE, [], $this->quick_replies);
