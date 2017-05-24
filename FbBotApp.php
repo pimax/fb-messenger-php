@@ -78,7 +78,7 @@ class FbBotApp
      * @param string $fields
      * @return UserProfile
      */
-    public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender')
+    public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender,is_payment_enabled,last_ad_referral')
     {
         return new UserProfile($this->call($id, [
             'fields' => $fields
