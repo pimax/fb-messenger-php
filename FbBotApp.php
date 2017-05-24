@@ -50,33 +50,9 @@ class FbBotApp
      */
      public function send($message)
      {
-         $maxlength = 640;
 
-         //CHECK LENGTH OF TEXT FIRST + MAYBE SEND MULTIPLE MESSAGES
-         $data = $message->getData();
+         return $this->call('me/messages', $message->getData(););
 
-         if ( isset($data['message']['text']) && strlen(utf8_decode($data['message']['text'])) > $maxlength ) {
-
-             $message_text = $data['message']['text'];
-
-             $pages = ceil( strlen(utf8_decode($message_text)) / $maxlength );
-
-             for ($x=0; $x<$pages; $x++) {
-
-                 $text = substr( $message_text, $x*$maxlength, ($x+1)*$maxlength );
-
-                 $data['message']['text'] = $text;
-
-                 $res = $this->call('me/messages', $data);
-             }
-
-             return $res;
-
-         } else {
-
-             return $this->call('me/messages', $data);
-
-         }
      }
 
     /**
