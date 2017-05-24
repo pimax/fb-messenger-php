@@ -48,10 +48,12 @@ class FbBotApp
      * @param Message $message
      * @return array
      */
-    public function send($message)
-    {
-        return $this->call('me/messages', $message->getData());
-    }
+     public function send($message)
+     {
+
+         return $this->call('me/messages', $message->getData(););
+
+     }
 
     /**
      * Upload File (image, audio, video, file)
@@ -76,7 +78,7 @@ class FbBotApp
      * @param string $fields
      * @return UserProfile
      */
-    public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender')
+    public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender,is_payment_enabled,last_ad_referral')
     {
         return new UserProfile($this->call($id, [
             'fields' => $fields
@@ -243,10 +245,10 @@ class FbBotApp
             'fields' => 'whitelisted_domains',
         ], self::TYPE_GET);
     }
-    
+
     /**
      * Set Chat Extension Home URL
-     * 
+     *
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
      * @param string  $url
      * @param string  $webview_height_ratio
@@ -264,7 +266,7 @@ class FbBotApp
             ]
         ], self::TYPE_POST);
     }
-    
+
     /**
      * Delete Chat Extension Home Url
      *
@@ -277,7 +279,7 @@ class FbBotApp
             'fields' => ['home_url'],
         ], self::TYPE_DELETE);
     }
-    
+
     /**
      * Get Chat Extension Home Url
      *
