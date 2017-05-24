@@ -124,6 +124,11 @@ class StructuredMessage extends Message
      */
     protected $quick_replies = [];
 
+    /**
+     * @var null|string
+     */
+    protected $tag = null;
+    
 
     /**
      * StructuredMessage constructor.

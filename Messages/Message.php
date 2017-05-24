@@ -28,6 +28,11 @@ class Message
     /**
      * @var null|string
      */
+    protected $tag = null;
+    
+    /**
+     * @var null|string
+     */
     protected $notification_type = null;
 
     /**
