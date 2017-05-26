@@ -50,9 +50,7 @@ class FbBotApp
      */
      public function send($message)
      {
-
-         return $this->call('me/messages', $message->getData(););
-
+         return $this->call('me/messages', $message->getData());
      }
 
     /**
