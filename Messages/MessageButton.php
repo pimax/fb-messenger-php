@@ -87,6 +87,12 @@ class MessageButton
      */
     protected $share_contents = null;
 
+    /*
+     * Set to hide to disable sharing in the webview (for sensitive info).
+     * 
+     * @var null|string
+     */
+    protected $webview_share_button = null;
 
     /**
      * MessageButton constructor.
@@ -94,8 +100,13 @@ class MessageButton
      * @param string $type
      * @param string $title
      * @param string $url url or postback
+     * @param string $webview_height_ratio
+     * @param boolean $messenger_extensions
+     * @param string $fallback_url
+     * @param string $share_contents
+     * @param string $webview_share_button
      */
-    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $share_contents = null)
+    public function __construct($type, $title = '', $url = '', $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $share_contents = null, $webview_share_button = null)
     {
         $this->type = $type;
         $this->title = $title;
@@ -104,7 +115,8 @@ class MessageButton
         $this->messenger_extensions = $messenger_extensions;
         $this->fallback_url = $fallback_url;
         $this->share_contents = $share_contents;
-
+        $this->webview_share_button = $webview_share_button;
+        
         if (!$url) {
             $url = $title;
         }
@@ -146,6 +158,10 @@ class MessageButton
               if ($this->messenger_extensions){
                   $result['messenger_extensions'] = $this->messenger_extensions;
                   $result['fallback_url'] = $this->fallback_url;
+              }
+              
+              if($this->webview_share_button){
+                  $result['webview_share_button'] = $this->webview_share_button ;
               }
             break;
 
