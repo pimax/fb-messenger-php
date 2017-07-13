@@ -53,6 +53,31 @@ class FbBotApp
          return $this->call('me/messages', $message->getData());
      }
 
+     /**
+      * Debugging Tool - Can accept an object, array, string, number
+      *
+      * @param Message $message
+      * @return array
+      */
+     public function debug($fb_id, $message)
+     {
+
+         $maxlength = 640;
+
+         $length = strlen(json_encode( $message ));
+
+         $pages = ceil($length/$maxlength);
+
+         for ($x=0; $x<$pages; $x++) {
+
+             $this->send(new Message($fb_id,substr(json_encode($message), $x*$maxlength, $maxlength )));
+
+         }
+
+         return true;
+
+     }
+
     /**
      * Upload File (image, audio, video, file)
      *
