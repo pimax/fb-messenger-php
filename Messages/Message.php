@@ -70,7 +70,7 @@ class Message
      * @var null|array
      */
     protected $quick_replies = null;
-    
+
     /**
      * Message constructor.
      *
@@ -90,6 +90,9 @@ class Message
         $this->notification_type = $notification_type;
     }
 
+    public function setTag($tag) {
+        $this->tag = $tag;
+    }
     /**
      * Get message data
      *
