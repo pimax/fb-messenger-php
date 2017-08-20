@@ -53,6 +53,80 @@ class FbBotApp
          return $this->call('me/messages', $message->getData());
      }
 
+     public function batch($messages)
+     {
+        //Max 50 Requests per batch send
+        $count = 0;
+        $data = [];
+        $response = [];
+
+        foreach ($messages as $message) {
+
+            $message_data = $message->getData();
+
+            $data['batch'][] = [
+              "method"  => "POST",
+              "relative_url"  => "me/messages",
+              "body" => http_build_query($message_data)
+            ];
+
+            $count++;
+
+            if ( $count === 50 ) {
+                $data['batch'] = json_encode($data['batch']);
+                $response[] = $this->call('/', $data);
+                $data['batch'] = [];
+            }
+
+        }
+
+        //send out last batch
+        if ( !empty($data['batch']) ) {
+            $data['batch'] = json_encode($data['batch']);
+            $response[] = $this->call('me/messages', $data);
+        }
+
+        return $response;
+     }
+
+     public function batchIds($fb_ids, $message)
+     {
+        //Less resource intensive version
+
+        //Max 50 Requests per batch send
+        $count = 0;
+        $data = [];
+        $response = [];
+        $message_data = $message->getData();
+
+        foreach ($fb_ids as $fb_id) {
+
+            $message_data['recipient']['id'] = $fb_id;
+
+            $data['batch'][] = [
+              "method"  => "POST",
+              "relative_url"  => "me/messages",
+              "body" => http_build_query($message_data)
+            ];
+
+            $count++;
+
+            if ( $count === 50 ) {
+                $data['batch'] = json_encode($data['batch']);
+                $response[] = $this->call('/', $data);
+                $data['batch'] = [];
+            }
+        }
+
+        //send out last batch
+        if ( !empty($data['batch']) ) {
+            $data['batch'] = json_encode($data['batch']);
+            $response[] = $this->call('me/messages', $data);
+        }
+
+        return $response;
+     }
+
      /**
       * Debugging Tool - Can accept an object, array, string, number
       *
