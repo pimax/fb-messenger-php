@@ -128,7 +128,7 @@ class StructuredMessage extends Message
     /**
      * StructuredMessage constructor.
      *
-     * @param string $recipient
+     * @param string $recipient - If No Recipient assume it's share_contents for element_share
      * @param string $type
      * @param array  $data
      * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
@@ -136,7 +136,7 @@ class StructuredMessage extends Message
      * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
-     public function __construct($recipient, $type, $data, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR)
+     public function __construct($recipient=null, $type, $data, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR)
      {
          $this->recipient = $recipient;
          $this->type = $type;
@@ -200,6 +200,7 @@ class StructuredMessage extends Message
      */
     public function getData()
     {
+
         $result = [
             'attachment' => [
                 'type' => 'template',
@@ -209,8 +210,12 @@ class StructuredMessage extends Message
             ]
         ];
 
-        foreach ($this->quick_replies as $qr) {
-            $result['quick_replies'][] = $qr->getData();
+        if (is_array($this->quick_replies)) {
+            foreach ($this->quick_replies as $qr) {
+                if ($qr instanceof QuickReplyButton) {
+                    $result['quick_replies'][] = $qr->getData();
+                }
+            }
         }
 
         switch ($this->type)
@@ -270,13 +275,21 @@ class StructuredMessage extends Message
             break;
         }
 
-        return [
-            'recipient' =>  [
-                'id' => $this->recipient
-            ],
-            'message' => $result,
-            'tag' => $this->tag,
-            'notification_type'=> $this->notification_type
-        ];
+
+        if ($this->recipient) {
+            return [
+                'recipient' =>  [
+                    'id' => $this->recipient
+                ],
+                'message' => $result,
+                'tag' => $this->tag,
+                'notification_type'=> $this->notification_type
+            ];
+        } else {
+            //share_contents only
+            return [
+                'attachment' => $result['attachment']
+            ];
+        }
     }
 }
