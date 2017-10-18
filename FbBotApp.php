@@ -26,7 +26,7 @@ class FbBotApp
      *
      * @var string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.6/';
+    protected $apiUrl = 'https://graph.facebook.com/v2.8/';
 
     /**
      * @var null|string
@@ -136,19 +136,21 @@ class FbBotApp
      public function debug($fb_id, $message)
      {
 
-         $maxlength = 640;
+          $responses = [];
 
-         $length = strlen(json_encode( $message ));
+          $maxlength = 640;
 
-         $pages = ceil($length/$maxlength);
+          $length = strlen(json_encode( $message, JSON_UNESCAPED_SLASHES ) );
 
-         for ($x=0; $x<$pages; $x++) {
+          $pages = ceil($length/$maxlength);
 
-             $this->send(new Message($fb_id,substr(json_encode($message), $x*$maxlength, $maxlength )));
+          for ($x=0; $x<$pages; $x++) {
 
-         }
+              $responses[] = $this->send(new Message($fb_id,substr( json_encode( $message, JSON_UNESCAPED_SLASHES ), $x*$maxlength, $maxlength ) ) );
 
-         return true;
+          }
+
+          return $responses;
 
      }
 
