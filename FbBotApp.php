@@ -263,8 +263,10 @@ class FbBotApp
         if ($audience_type === "custom") {
             return $this->call('me/messenger_profile', [
                 'target_audience' => [
-                   'audience_type' => $audience_type,
-                   $list_type => $countries_array
+                    'audience_type' => $audience_type,
+                    'countries' => [
+                        $list_type => $countries_array
+                    ]
                ]
             ], self::TYPE_POST);
         } else {
