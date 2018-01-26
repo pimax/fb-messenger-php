@@ -448,6 +448,21 @@ class FbBotApp
         ], self::TYPE_POST);
     }
 
+
+    /**
+     * Messaging Insights API
+     * Metrics = page_messages_active_threads_unique, page_messages_blocked_conversations_unique, page_messages_reported_conversations_unique
+     *           page_messages_reported_conversations_by_report_type_unique, page_messages_feedback_by_action_unique,
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/analytics#insights
+     * @return array
+     */
+    public function getInsights($metric = 'page_messages_active_threads_unique'){
+        return $this->call('me/insights', [
+            'metric' => $metric
+        ], self::TYPE_GET);
+    }
+
     /**
      * Request to API
      *
