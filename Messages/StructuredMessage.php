@@ -20,6 +20,11 @@ class StructuredMessage extends Message
     const TYPE_GENERIC = "generic";
 
     /**
+     * Structured message media type
+     */
+    const TYPE_MEDIA = "media";
+
+    /**
      * Structured message list type
      */
     const TYPE_LIST = "list";
@@ -159,6 +164,10 @@ class StructuredMessage extends Message
                 if(isset($data['image_aspect_ratio'])) {
                     $this->image_aspect_ratio = $data['image_aspect_ratio'];
                 }
+            break;
+
+            case self::TYPE_MEDIA:
+                $this->elements = $data['elements'];
             break;
 
             case self::TYPE_LIST:
