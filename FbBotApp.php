@@ -431,6 +431,23 @@ class FbBotApp
         ], self::TYPE_DELETE);
     }
 
+
+    /**
+     * Set NLP Settings
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
+     * @return array
+     */
+    public function setNLP($nlp_enabled = true, $model = 'ENGLISH', $custom_token = null, $verbose = false, $n_best = 1){
+        return $this->call('me/nlp_configs', [
+            'nlp_enabled' => $nlp_enabled,
+            'model' => $model,
+            'custom_token' => $custom_token,
+            'verbose' => $verbose,
+            'n_best' => $n_best
+        ], self::TYPE_POST);
+    }
+
     /**
      * Request to API
      *
