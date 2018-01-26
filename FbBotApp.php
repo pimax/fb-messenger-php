@@ -56,6 +56,7 @@ class FbBotApp
      public function batch($messages)
      {
         //Max 50 Requests per batch send
+        $max_batch_count = 50;
         $count = 0;
         $data = [];
         $response = [];
@@ -72,10 +73,12 @@ class FbBotApp
 
             $count++;
 
-            if ( $count === 50 ) {
+
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
-                $response[] = $this->call('/', $data);
+                $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
+                $count = 0;
             }
 
         }
@@ -83,7 +86,7 @@ class FbBotApp
         //send out last batch
         if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
-            $response[] = $this->call('me/messages', $data);
+            $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
@@ -94,6 +97,7 @@ class FbBotApp
         //Less resource intensive version
 
         //Max 50 Requests per batch send
+        $max_batch_count = 50;
         $count = 0;
         $data = [];
         $response = [];
@@ -111,17 +115,18 @@ class FbBotApp
 
             $count++;
 
-            if ( $count === 50 ) {
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
-                $response[] = $this->call('/', $data);
+                $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
+                $count = 0;
             }
         }
 
         //send out last batch
         if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
-            $response[] = $this->call('me/messages', $data);
+            $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
@@ -424,6 +429,38 @@ class FbBotApp
         return $this->call('me/messenger_profile', [
             'fields' => ['persistent_menu'],
         ], self::TYPE_DELETE);
+    }
+
+
+    /**
+     * Set NLP Settings
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
+     * @return array
+     */
+    public function setNLP($nlp_enabled = true, $model = 'ENGLISH', $custom_token = null, $verbose = false, $n_best = 1){
+        return $this->call('me/nlp_configs', [
+            'nlp_enabled' => $nlp_enabled,
+            'model' => $model,
+            'custom_token' => $custom_token,
+            'verbose' => $verbose,
+            'n_best' => $n_best
+        ], self::TYPE_POST);
+    }
+
+
+    /**
+     * Messaging Insights API
+     * Metrics = page_messages_active_threads_unique, page_messages_blocked_conversations_unique, page_messages_reported_conversations_unique
+     *           page_messages_reported_conversations_by_report_type_unique, page_messages_feedback_by_action_unique,
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/analytics#insights
+     * @return array
+     */
+    public function getInsights($metric = 'page_messages_active_threads_unique'){
+        return $this->call('me/insights', [
+            'metric' => $metric
+        ], self::TYPE_GET);
     }
 
     /**

@@ -20,15 +20,16 @@ class QuickReply extends Message{
      * @param array $quick_replies - array of array("content_type","title","payload"),..,..
      * @param string $tag - SHIPPING_UPDATE, RESERVATION_UPDATE, ISSUE_RESOLUTION
      */
-    public function __construct($recipient, $text, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR)
+    public function __construct($recipient, $text, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR, $messaging_type = parent::TYPE_RESPONSE)
     {
         $this->recipient = $recipient;
         $this->text = $text;
         $this->quick_replies = $quick_replies;
         $this->tag = $tag;
         $this->notification_type = $notification_type;
-        //parent::__construct($recipient,$text);
+        $this->messaging_type = $messaging_type;
     }
+
     public function getData() {
         $result = [
             'recipient' =>  [
@@ -38,7 +39,8 @@ class QuickReply extends Message{
                 'text' => $this->text
             ],
             'tag'=> $this->tag,
-            'notification_type'=> $this->notification_type
+            'notification_type'=> $this->notification_type,
+            'messaging_type' => $this->messaging_type
         ];
 
         foreach ($this->quick_replies as $qr) {

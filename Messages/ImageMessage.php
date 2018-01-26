@@ -35,12 +35,13 @@ class ImageMessage extends Message
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
 
-    public function __construct($recipient, $file, $quick_replies = array(), $notification_type = parent::NOTIFY_REGULAR)
+    public function __construct($recipient, $file, $quick_replies = array(), $notification_type = parent::NOTIFY_REGULAR, $messaging_type = parent::TYPE_RESPONSE)
     {
         $this->recipient = $recipient;
         $this->text = $file;
         $this->quick_replies = $quick_replies;
         $this->notification_type = $notification_type;
+        $this->messaging_type = $messaging_type;
     }
 
     /**
@@ -54,7 +55,8 @@ class ImageMessage extends Message
             'recipient' =>  [
                 'id' => $this->recipient
             ],
-            'notification_type'=> $this->notification_type
+            'notification_type'=> $this->notification_type,
+            'messaging_type' => $this->messaging_type
         ];
 
         $attachment = new Attachment(Attachment::TYPE_IMAGE, [], $this->quick_replies);
