@@ -11,6 +11,28 @@ namespace pimax\Messages;
 class Message
 {
 
+
+
+    /**
+     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
+     */
+    const TYPE_RESPONSE = "RESPONSE";
+
+    /**
+     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
+     */
+    const TYPE_UPDATE = "UPDATE";
+
+    /**
+     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
+     */
+    const TYPE_MESSAGE_TAG = "MESSAGE_TAG";
+
+    /**
+     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
+     */
+    const TYPE_NON_PROMOTIONAL_SUBSCRIPTION = "NON_PROMOTIONAL_SUBSCRIPTION";
+
     /**
      * Tag type
      */
@@ -67,6 +89,11 @@ class Message
     protected $notification_type = null;
 
     /**
+     * @var null|string
+     */
+    protected $messaging_type = null;
+
+    /**
      * @var null|array
      */
     protected $quick_replies = null;
@@ -81,13 +108,15 @@ class Message
      * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
-    public function __construct($recipient, $text, $user_ref = false, $tag = null, $notification_type = self::NOTIFY_REGULAR)
+    public function __construct($recipient, $text, $user_ref = false, $tag = null, $notification_type = self::NOTIFY_REGULAR, $messaging_type = self::TYPE_RESPONSE)
     {
         $this->recipient = $recipient;
         $this->text = $text;
         $this->user_ref = $user_ref;
         $this->tag = $tag;
         $this->notification_type = $notification_type;
+        $this->messaging_type = $messaging_type;
+        $this->messaging_type = $messaging_type;
     }
 
     public function setTag($tag) {
@@ -106,7 +135,8 @@ class Message
                 'text' => $this->text
             ],
             'tag'=> $this->tag,
-            'notification_type'=> $this->notification_type
+            'notification_type'=> $this->notification_type,
+            'messaging_type' => $this->messaging_type
         ];
     }
 

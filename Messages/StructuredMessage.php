@@ -136,13 +136,14 @@ class StructuredMessage extends Message
      * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
-     public function __construct($recipient=null, $type, $data, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR)
+     public function __construct($recipient=null, $type, $data, $quick_replies = array(), $tag = null, $notification_type = parent::NOTIFY_REGULAR, $messaging_type = parent::TYPE_RESPONSE)
      {
          $this->recipient = $recipient;
          $this->type = $type;
          $this->quick_replies = $quick_replies;
          $this->tag = $tag;
          $this->notification_type = $notification_type;
+         $this->messaging_type = $messaging_type;
 
         switch ($type)
         {
@@ -283,7 +284,8 @@ class StructuredMessage extends Message
                 ],
                 'message' => $result,
                 'tag' => $this->tag,
-                'notification_type'=> $this->notification_type
+                'notification_type'=> $this->notification_type,
+                'messaging_type' => $this->messaging_type
             ];
         } else {
             //share_contents only

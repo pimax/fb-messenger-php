@@ -56,6 +56,7 @@ class FbBotApp
      public function batch($messages)
      {
         //Max 50 Requests per batch send
+        $max_batch_count = 50;
         $count = 0;
         $data = [];
         $response = [];
@@ -72,10 +73,12 @@ class FbBotApp
 
             $count++;
 
-            if ( $count === 50 ) {
+
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
-                $response[] = $this->call('/', $data);
+                $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
+                $count = 0;
             }
 
         }
@@ -83,7 +86,7 @@ class FbBotApp
         //send out last batch
         if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
-            $response[] = $this->call('me/messages', $data);
+            $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
@@ -94,6 +97,7 @@ class FbBotApp
         //Less resource intensive version
 
         //Max 50 Requests per batch send
+        $max_batch_count = 50;
         $count = 0;
         $data = [];
         $response = [];
@@ -111,17 +115,18 @@ class FbBotApp
 
             $count++;
 
-            if ( $count === 50 ) {
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
-                $response[] = $this->call('/', $data);
+                $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
+                $count = 0;
             }
         }
 
         //send out last batch
         if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
-            $response[] = $this->call('me/messages', $data);
+            $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
