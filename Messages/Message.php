@@ -14,53 +14,35 @@ class Message
 
 
     /**
-     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
+     * Messaging types //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
      */
     const TYPE_RESPONSE = "RESPONSE";
-
-    /**
-     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
-     */
     const TYPE_UPDATE = "UPDATE";
-
-    /**
-     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
-     */
     const TYPE_MESSAGE_TAG = "MESSAGE_TAG";
-
-    /**
-     * Messaging type //https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types
-     */
     const TYPE_NON_PROMOTIONAL_SUBSCRIPTION = "NON_PROMOTIONAL_SUBSCRIPTION";
 
     /**
-     * Tag type
+     * Tag types // https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags
      */
     const TAG_SHIPPING_UPDATE = "SHIPPING_UPDATE";
-
-    /**
-     * Tag type
-     */
     const TAG_RESERVATION_UPDATE = "RESERVATION_UPDATE";
-
-    /**
-     * Tag type
-     */
     const TAG_ISSUE_RESOLUTION = "ISSUE_RESOLUTION";
+    const TAG_ACCOUNT_UPDATE = "ACCOUNT_UPDATE";
+    const TAG_PAYMENT_UPDATE = "PAYMENT_UPDATE";
+    const TAG_PERSONAL_FINANCE_UPDATE = "PERSONAL_FINANCE_UPDATE";
+    const TAG_PAIRING_UPDATE = "PAIRING_UPDATE";
+    const TAG_APPLICATION_UPDATE = "APPLICATION_UPDATE";
+    const TAG_APPOINTMENT_UPDATE = "APPOINTMENT_UPDATE";
+    const TAG_FEATURE_FUNCTIONALITY_UPDATE = "FEATURE_FUNCTIONALITY_UPDATE";
+    const TAG_GAME_EVENT = "GAME_EVENT";
+    const TAG_TRANSPORTATION_UPDATE = "TRANSPORTATION_UPDATE";
+    const TAG_TICKET_UPDATE = "TICKET_UPDATE";
 
     /**
-     * Notification type
+     * Notification types
      */
     const NOTIFY_REGULAR = "REGULAR";
-
-    /**
-     * Notification type
-     */
     const NOTIFY_SILENT_PUSH = "SILENT_PUSH";
-
-    /**
-     * Notification type
-     */
     const NOTIFY_NO_PUSH = "NO_PUSH";
 
     /**
