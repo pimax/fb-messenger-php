@@ -143,7 +143,7 @@ class FbBotApp
 
           $responses = [];
 
-          $maxlength = 640;
+          $maxlength = 2000;
 
           $length = strlen(json_encode( $message, JSON_UNESCAPED_SLASHES ) );
 
