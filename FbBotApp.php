@@ -143,7 +143,7 @@ class FbBotApp
 
           $responses = [];
 
-          $maxlength = 640;
+          $maxlength = 2000;
 
           $length = strlen(json_encode( $message, JSON_UNESCAPED_SLASHES ) );
 
@@ -151,7 +151,7 @@ class FbBotApp
 
           for ($x=0; $x<$pages; $x++) {
 
-              $responses[] = $this->send(new Message($fb_id,substr( json_encode( $message, JSON_UNESCAPED_SLASHES ), $x*$maxlength, $maxlength ) ) );
+              $responses[] = $this->send(new Message($fb_id,substr( json_encode( $message, JSON_UNESCAPED_SLASHES ), $x*$maxlength, $maxlength, false, "ISSUE_RESOLUTION", "REGULAR", "MESSAGE_TAG" ) ) );
 
           }
 
