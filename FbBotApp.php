@@ -48,13 +48,13 @@ class FbBotApp
      * @param Message $message
      * @return array
      */
-    public function send($message)
-    {
-        return $this->call('me/messages', $message->getData());
-    }
+     public function send($message)
+     {
+         return $this->call('me/messages', $message->getData());
+     }
 
-    public function batch($messages)
-    {
+     public function batch($messages)
+     {
         //Max 50 Requests per batch send
         $max_batch_count = 50;
         $count = 0;
@@ -66,15 +66,15 @@ class FbBotApp
             $message_data = $message->getData();
 
             $data['batch'][] = [
-                "method" => "POST",
-                "relative_url" => "me/messages",
-                "body" => http_build_query($message_data)
+              "method"  => "POST",
+              "relative_url"  => "me/messages",
+              "body" => http_build_query($message_data)
             ];
 
             $count++;
 
 
-            if ($count === $max_batch_count) {
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
                 $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
@@ -84,16 +84,16 @@ class FbBotApp
         }
 
         //send out last batch
-        if (!empty($data['batch'])) {
+        if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
             $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
-    }
+     }
 
-    public function batchIds($fb_ids, $message)
-    {
+     public function batchIds($fb_ids, $message)
+     {
         //Less resource intensive version
 
         //Max 50 Requests per batch send
@@ -108,14 +108,14 @@ class FbBotApp
             $message_data['recipient']['id'] = $fb_id;
 
             $data['batch'][] = [
-                "method" => "POST",
-                "relative_url" => "me/messages",
-                "body" => http_build_query($message_data)
+              "method"  => "POST",
+              "relative_url"  => "me/messages",
+              "body" => http_build_query($message_data)
             ];
 
             $count++;
 
-            if ($count === $max_batch_count) {
+            if ( $count === $max_batch_count ) {
                 $data['batch'] = json_encode($data['batch']);
                 $response = array_merge($response, $this->call('/', $data));
                 $data['batch'] = [];
@@ -124,40 +124,40 @@ class FbBotApp
         }
 
         //send out last batch
-        if (!empty($data['batch'])) {
+        if ( !empty($data['batch']) ) {
             $data['batch'] = json_encode($data['batch']);
             $response = array_merge($response, $this->call('me/messages', $data));
         }
 
         return $response;
-    }
+     }
 
-    /**
-     * Debugging Tool - Can accept an object, array, string, number
-     *
-     * @param Message $message
-     * @return array
-     */
-    public function debug($fb_id, $message)
-    {
+     /**
+      * Debugging Tool - Can accept an object, array, string, number
+      *
+      * @param Message $message
+      * @return array
+      */
+     public function debug($fb_id, $message)
+     {
 
-        $responses = [];
+          $responses = [];
 
-        $maxlength = 2000;
+          $maxlength = 2000;
 
-        $length = strlen(json_encode($message, JSON_UNESCAPED_SLASHES));
+          $length = strlen(json_encode( $message, JSON_UNESCAPED_SLASHES ) );
 
-        $pages = ceil($length / $maxlength);
+          $pages = ceil($length/$maxlength);
 
-        for ($x = 0; $x < $pages; $x++) {
+          for ($x=0; $x<$pages; $x++) {
 
-            $responses[] = $this->send(new Message($fb_id, substr(json_encode($message, JSON_UNESCAPED_SLASHES), $x * $maxlength, $maxlength), false, "ISSUE_RESOLUTION", "REGULAR", "MESSAGE_TAG"));
+              $responses[] = $this->send( new Message($fb_id,substr( json_encode( $message, JSON_UNESCAPED_SLASHES ), $x*$maxlength, $maxlength), false, "ISSUE_RESOLUTION", "REGULAR", "MESSAGE_TAG" ) );
 
-        }
+          }
 
-        return $responses;
+          return $responses;
 
-    }
+     }
 
     /**
      * Upload File (image, audio, video, file)
@@ -170,7 +170,7 @@ class FbBotApp
     {
         $data = $attachment->getData();
         $data['attachment']['payload']['is_reusable'] = true;
-        return $this->call('me/message_attachments', [
+        return $this->call('me/message_attachments',[
             'message' => $data
         ], self::TYPE_POST);
     }
@@ -178,7 +178,7 @@ class FbBotApp
     /**
      * Get User Profile Info
      *
-     * @param int $id
+     * @param int    $id
      * @param string $fields
      * @return UserProfile
      */
@@ -224,8 +224,7 @@ class FbBotApp
      * @param array $localizedGreetings
      * @return array
      */
-    public function setGreetingText($localizedGreetings)
-    {
+    public function setGreetingText($localizedGreetings){
         return $this->call('me/messenger_profile', [
             'greeting' => $localizedGreetings
         ], self::TYPE_POST);
@@ -251,8 +250,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text
      * @return array
      */
-    public function getGreetingText()
-    {
+    public function getGreetingText(){
         return $this->call('me/messenger_profile', [
             'fields' => 'greeting',
         ], self::TYPE_GET);
@@ -267,8 +265,7 @@ class FbBotApp
      * @param array $countries_array
      * @return array
      */
-    public function setTargetAudience($audience_type, $list_type = null, $countries_array = null)
-    {
+    public function setTargetAudience($audience_type, $list_type=null, $countries_array=null){
 
         if ($audience_type === "custom") {
             return $this->call('me/messenger_profile', [
@@ -277,13 +274,13 @@ class FbBotApp
                     'countries' => [
                         $list_type => $countries_array
                     ]
-                ]
+               ]
             ], self::TYPE_POST);
         } else {
             return $this->call('me/messenger_profile', [
                 'target_audience' => [
-                    'audience_type' => $audience_type
-                ]
+                   'audience_type' => $audience_type
+               ]
             ], self::TYPE_POST);
         }
     }
@@ -307,8 +304,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/target-audience
      * @return array
      */
-    public function getTargetAudience()
-    {
+    public function getTargetAudience(){
         return $this->call('me/messenger_profile', [
             'fields' => 'target_audience',
         ], self::TYPE_GET);
@@ -321,10 +317,9 @@ class FbBotApp
      * @param array|string $domains
      * @return array
      */
-    public function setDomainWhitelist($domains)
-    {
+    public function setDomainWhitelist($domains){
 
-        if (!is_array($domains))
+        if(!is_array($domains))
             $domains = array($domains);
 
         return $this->call('me/messenger_profile', [
@@ -351,8 +346,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/domain-whitelisting
      * @return array
      */
-    public function getDomainWhitelist()
-    {
+    public function getDomainWhitelist(){
         return $this->call('me/messenger_profile', [
             'fields' => 'whitelisted_domains',
         ], self::TYPE_GET);
@@ -362,14 +356,13 @@ class FbBotApp
      * Set Chat Extension Home URL
      *
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
-     * @param string $url
-     * @param string $webview_height_ratio
-     * @param string $webview_share_button
+     * @param string  $url
+     * @param string  $webview_height_ratio
+     * @param string  $webview_share_button
      * @param boolean $in_test
      * @return array
      */
-    public function setHomeUrl($url, $webview_height_ratio = 'tall', $webview_share_button = 'hide', $in_test = false)
-    {
+    public function setHomeUrl($url, $webview_height_ratio = 'tall', $webview_share_button = 'hide', $in_test = false){
         return $this->call('me/messenger_profile', [
             'home_url' => [
                 'url' => $url,
@@ -399,8 +392,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/home-url/
      * @return array
      */
-    public function getHomeUrl()
-    {
+    public function getHomeUrl(){
         return $this->call('me/messenger_profile', [
             'fields' => 'home_url',
         ], self::TYPE_GET);
@@ -446,8 +438,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
      * @return array
      */
-    public function setNLP($nlp_enabled = true, $model = 'ENGLISH', $custom_token = null, $verbose = false, $n_best = 1)
-    {
+    public function setNLP($nlp_enabled = true, $model = 'ENGLISH', $custom_token = null, $verbose = false, $n_best = 1){
         return $this->call('me/nlp_configs', [
             'nlp_enabled' => $nlp_enabled,
             'model' => $model,
@@ -466,8 +457,7 @@ class FbBotApp
      * @see https://developers.facebook.com/docs/messenger-platform/analytics#insights
      * @return array
      */
-    public function getInsights($metric = 'page_messages_active_threads_unique')
-    {
+    public function getInsights($metric = 'page_messages_active_threads_unique'){
         return $this->call('me/insights', [
             'metric' => $metric
         ], self::TYPE_GET);
@@ -478,7 +468,7 @@ class FbBotApp
      *
      * @access public
      * @param string $url
-     * @param array $data
+     * @param array  $data
      * @param string $type Type of request (GET|POST|DELETE)
      * @return array
      */
@@ -491,15 +481,15 @@ class FbBotApp
         ];
 
         if ($type == self::TYPE_GET) {
-            $url .= '?' . http_build_query($data);
+            $url .= '?'.http_build_query($data);
         }
 
-        $process = curl_init($this->apiUrl . $url);
+        $process = curl_init($this->apiUrl.$url);
         curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($process, CURLOPT_HEADER, false);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
 
-        if ($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
+        if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
             curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
         }
@@ -515,10 +505,10 @@ class FbBotApp
          * Check for cURL Errors and, if found display the error code
          *
          * @see http://php.net/manual/en/function.curl-error.php
-         * */
-        $curl_errors = curl_error($curl);
+         */
+        $curl_errors = curl_error($process);
         if ($curl_errors) {
-            echo "cURL Error #:" . $curl_errors;
+            echo 'cURL Error #:' . $curl_errors;
         }
 
         curl_close($process);
