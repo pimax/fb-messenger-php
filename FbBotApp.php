@@ -502,6 +502,16 @@ class FbBotApp
         $return = curl_exec($process);
         curl_close($process);
 
+        /**
+         * Check for cURL Errors and, if found display the error code
+         *
+         * @see http://php.net/manual/en/function.curl-error.php
+         */
+        $curl_errors = curl_error($process);
+        if ($curl_errors) {
+            echo 'cURL Error #:' . $curl_errors;
+        }
+
         return json_decode($return, true);
     }
 }
