@@ -508,7 +508,6 @@ class FbBotApp
 
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($process);
-        curl_close($process);
 
         /**
          * Check for cURL Errors and, if found display the error code
@@ -519,6 +518,8 @@ class FbBotApp
         if ($curl_error) {
             $this->curl_error = $curl_error;
         }
+
+        curl_close($process);
 
         return json_decode($return, true);
     }
