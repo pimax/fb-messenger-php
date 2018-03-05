@@ -33,6 +33,14 @@ class FbBotApp
      */
     protected $token = null;
 
+
+    /**
+     * Contains the last cURL error for the current session if encountered
+     *
+     * @var null|string
+     */
+    protected $curl_error = null;
+
     /**
      * FbBotApp constructor.
      * @param string $token
@@ -507,11 +515,23 @@ class FbBotApp
          *
          * @see http://php.net/manual/en/function.curl-error.php
          */
-        $curl_errors = curl_error($process);
-        if ($curl_errors) {
-            echo 'cURL Error #:' . $curl_errors;
+        $curl_error = curl_error($process);
+        if ($curl_error) {
+            $this->curl_error = $curl_error;
         }
 
         return json_decode($return, true);
     }
+
+    /**
+     * Get the last cURL error if encountered
+     *
+     * @return null|string
+     */
+    public function getCurlError()
+    {
+        return $this->curl_error;
+    }
+
+
 }
