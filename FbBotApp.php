@@ -499,7 +499,7 @@ class FbBotApp
 
         if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
             curl_setopt($process, CURLOPT_POST, 1);
-            curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($process, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
         if ($type == self::TYPE_DELETE) {
