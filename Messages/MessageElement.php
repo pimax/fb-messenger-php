@@ -67,7 +67,9 @@ class MessageElement
         $this->url = $url;
         $this->image_url = $image_url;
         $this->buttons = $buttons;
-        $this->default_action = $default_action;
+        if (!empty($default_action)) {
+            $this->default_action = $default_action;
+        }
     }
 
     /**
@@ -77,13 +79,23 @@ class MessageElement
      */
     public function getData()
     {
-        $result = [
-            'title' => $this->title,
-            'subtitle' => $this->subtitle,
-            'item_url' => $this->url,
-            'image_url' => $this->image_url,
-            'default_action' => $this->default_action
-        ];
+        
+         if (!empty($default_action)) {
+            $result = [
+                'title' => $this->title,
+                'subtitle' => $this->subtitle,
+                'item_url' => $this->url,
+                'image_url' => $this->image_url,
+                'default_action' => $this->default_action
+            ];
+        } else {
+            $result = [
+                'title' => $this->title,
+                'subtitle' => $this->subtitle,
+                'item_url' => $this->url,
+                'image_url' => $this->image_url,
+            ];
+        }
 
         if (!empty($this->buttons)) {
             $result['buttons'] = [];
