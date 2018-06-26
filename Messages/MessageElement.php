@@ -86,7 +86,7 @@ class MessageElement
             'image_url' => $this->image_url,
         ];
         
-        if (!empty($default_action)) {
+        if (!empty($this->default_action)) {
             $result['default_action'] = $this->default_action;
         }
 
