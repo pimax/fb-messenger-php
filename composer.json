@@ -1,13 +1,13 @@
 {
-  "name": "pimax/fb-messenger-php",
+  "name": "eknimation/fb-messenger-php",
   "description": " Facebook Messenger Bot PHP API",
-  "homepage": "https://github.com/pimax/fb-messenger-php",
+  "homepage": "https://github.com/eknimation/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
-      "name": "Max Pinyugin",
-      "email": "m.pinyugin@gmail.com",
-      "homepage": "http://russian-developers.com",
+      "name": "Eknimation",
+      "email": "eknimation@gmail.com",
+      "homepage": "http://www.akekapon.com",
       "role": "Developer"
     }
   ],
