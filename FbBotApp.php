@@ -425,6 +425,19 @@ class FbBotApp
             'persistent_menu' => $elements
         ], self::TYPE_POST);
     }
+    
+    /**
+     * Get Nested Menu
+     *
+     * @see https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
+     * @return array
+     */
+    public function getPersistentMenu()
+    {
+        return $this->call('me/messenger_profile', [
+            'fields' => 'persistent_menu',
+        ], self::TYPE_GET);
+    }
 
     /**
      * Remove Persistent Menu
