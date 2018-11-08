@@ -19,7 +19,6 @@ class Message
     const TYPE_RESPONSE = "RESPONSE";
     const TYPE_UPDATE = "UPDATE";
     const TYPE_MESSAGE_TAG = "MESSAGE_TAG";
-    const TYPE_NON_PROMOTIONAL_SUBSCRIPTION = "NON_PROMOTIONAL_SUBSCRIPTION";
 
     /**
      * Tag types // https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags
@@ -37,6 +36,7 @@ class Message
     const TAG_GAME_EVENT = "GAME_EVENT";
     const TAG_TRANSPORTATION_UPDATE = "TRANSPORTATION_UPDATE";
     const TAG_TICKET_UPDATE = "TICKET_UPDATE";
+    const TAG_NON_PROMOTIONAL_SUBSCRIPTION = "NON_PROMOTIONAL_SUBSCRIPTION";
 
     /**
      * Notification types
