@@ -191,7 +191,7 @@ class FbBotApp
      * @return UserProfile
      */
     public function userProfile($id, $fields = 'first_name,last_name,profile_pic,locale,timezone,gender')
-    {,
+    {
         return new UserProfile($this->call($id, [
             'fields' => $fields
         ], self::TYPE_GET));
