@@ -61,6 +61,18 @@ class FbBotApp
          return $this->call('me/messages', $message->getData());
      }
 
+    /**
+     * Reply a private Message
+     *
+     * @param Message $message
+     * @param Integer $id
+     * @return array
+     */
+    public function reply($message, $id)
+    {
+        return $this->call($id.'/private_replies', $message->getData());
+    }
+    
      public function batch($messages)
      {
         //Max 50 Requests per batch send
