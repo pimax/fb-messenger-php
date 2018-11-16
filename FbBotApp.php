@@ -61,16 +61,16 @@ class FbBotApp
          return $this->call('me/messages', $message->getData());
      }
 
-    /**
+   /**
      * Reply a private Message
      *
-     * @param Message $message
-     * @param Integer $id
+     * @param string $message
+     * @param int $id
      * @return array
      */
     public function reply($message, $id)
     {
-        return $this->call($id.'/private_replies', $message->getData());
+        return $this->call($id.'/private_replies', $message);
     }
     
      public function batch($messages)
