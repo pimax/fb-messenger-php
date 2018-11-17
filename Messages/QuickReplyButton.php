@@ -17,6 +17,16 @@ class QuickReplyButton
      * Location quick reply
      */
     const TYPE_LOCATION = "location";
+    
+    /**
+     * User phone number
+     */
+    const TYPE_USER_PHONE_NUMBER = "user_phone_number";
+    
+    /**
+     * User email
+     */
+    const TYPE_USER_EMAIL = "user_email";
 
     /**
      * Button type
@@ -77,13 +87,21 @@ class QuickReplyButton
         {
             case self::TYPE_LOCATION:
                 $result['image_url'] = $this->image_url;
-            break;
+                break;
 
             case self::TYPE_TEXT:
                 $result['payload'] = $this->payload;
                 $result['title'] = $this->title;
                 $result['image_url'] = $this->image_url;
-            break;
+                break;
+                
+            case self::TYPE_USER_PHONE_NUMBER:
+                $result['payload'] = $this->payload;
+                break;
+                
+            case self::TYPE_USER_EMAIL:
+                $result['payload'] = $this->payload;
+                break;
         }
 
         return $result;
