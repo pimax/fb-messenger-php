@@ -26,7 +26,7 @@ class FbBotApp
      *
      * @var string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.8/';
+    protected $apiUrl = 'https://graph.facebook.com/v3.2/';
 
     /**
      * @var null|string
