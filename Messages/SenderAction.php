@@ -29,15 +29,21 @@ class SenderAction
     protected $action = null;
 
     /**
+     * @var null|string
+     */
+    protected $persona = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
      * @param string $action
      */
-    public function __construct($recipient, $action)
+    public function __construct($recipient, $action, $persona)
     {
         $this->recipient = $recipient;
         $this->action = $action;
+        $this->persona = $persona;
 
     }
 
@@ -52,7 +58,8 @@ class SenderAction
             'recipient' =>  [
                 'id' => $this->recipient
             ],
-            'sender_action' => $this->action
+            'sender_action' => $this->action,
+            'persona_id' => $this->persona
         ];
     }
 }

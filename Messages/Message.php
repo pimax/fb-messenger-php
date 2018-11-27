@@ -81,6 +81,11 @@ class Message
     protected $quick_replies = null;
 
     /**
+     * @var null|string
+     */
+    protected $persona = null;
+
+    /**
      * Message constructor.
      *
      * @param string $recipient
@@ -90,7 +95,7 @@ class Message
      * @param string $notification_type - REGULAR, SILENT_PUSH, or NO_PUSH
      * https://developers.facebook.com/docs/messenger-platform/send-api-reference
      */
-    public function __construct($recipient, $text, $user_ref = false, $tag = null, $notification_type = self::NOTIFY_REGULAR, $messaging_type = self::TYPE_RESPONSE)
+    public function __construct($recipient, $text, $user_ref = false, $tag = null, $notification_type = self::NOTIFY_REGULAR, $messaging_type = self::TYPE_RESPONSE, $persona = null)
     {
         $this->recipient = $recipient;
         $this->text = $text;
@@ -99,6 +104,7 @@ class Message
         $this->notification_type = $notification_type;
         $this->messaging_type = $messaging_type;
         $this->messaging_type = $messaging_type;
+        $this->persona = $persona;
     }
 
     public function setTag($tag) {
@@ -118,7 +124,8 @@ class Message
             ],
             'tag'=> $this->tag,
             'notification_type'=> $this->notification_type,
-            'messaging_type' => $this->messaging_type
+            'messaging_type' => $this->messaging_type,
+            'persona_id' => $this->persona
         ];
     }
 

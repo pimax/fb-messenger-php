@@ -26,7 +26,7 @@ class FbBotApp
      *
      * @var string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v3.2/';
+    protected $apiUrl = 'https://graph.facebook.com/v2.8/';
 
     /**
      * @var null|string
@@ -61,7 +61,18 @@ class FbBotApp
          return $this->call('me/messages', $message->getData());
      }
 
-   /**
+    /**
+     * Send Message
+     *
+     * @param Message $message
+     * @return array
+     */
+    public function persona($message)
+    {
+        return $this->call('me/personas', $message->getData());
+    }
+
+    /**
      * Reply a private Message
      *
      * @param string $message
