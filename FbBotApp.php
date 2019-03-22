@@ -38,9 +38,9 @@ class FbBotApp
     /**
      * FB Messenger API Url
      *
-     * @var string
+     * @var null|string
      */
-    protected $apiUrl = 'https://graph.facebook.com/v3.2/';
+    protected $apiUrl;
 
     /**
      * @var null|string
