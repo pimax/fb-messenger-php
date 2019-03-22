@@ -44,10 +44,15 @@ class FbBotApp
     /**
      * FbBotApp constructor.
      * @param string $token
+     * @param string $version optional
      */
-    public function __construct($token)
+    public function __construct($token, $version = null)
     {
         $this->token = $token;
+        
+        if (! is_null($version)) {
+            $this->apiUrl = "https://graph.facebook.com/v$version/";
+        }
     }
 
     /**
