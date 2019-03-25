@@ -40,7 +40,7 @@ class FbBotApp
      *
      * @var null|string
      */
-    protected $apiUrl;
+    protected $apiUrl = null;
 
     /**
      * @var null|string
