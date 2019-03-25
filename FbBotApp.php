@@ -38,7 +38,7 @@ class FbBotApp
     /**
      * FB Messenger API Url
      *
-     * @var null|string
+     * @var null|string must necessarily define in the constructor
      */
     protected $apiUrl = null;
 
