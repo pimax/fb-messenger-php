@@ -33,7 +33,7 @@ class FbBotApp
      *
      * @var string
      */
-    protected $apiVersion = 'v3.2'
+    protected $apiVersion = 'v2.8'
 
     /**
      * FB Messenger API Url
