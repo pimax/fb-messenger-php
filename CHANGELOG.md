@@ -2,6 +2,7 @@
 
 ### New features & improvements:
 - Add user_phone_number & user_email to QuickReplyButton.php
+- Add api version selection in the constructor of the class FbBotApp
 
 ### Bug fixes:
 

@@ -20,13 +20,27 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
+    
+    /**
+     * FB Messenger base API Url
+     *
+     * @var string
+     */
+    protected $baseApiUrl = 'https://graph.facebook.com/';
+    
+    /**
+     * FB Messenger API version
+     *
+     * @var string
+     */
+    protected $apiVersion = 'v2.12'
 
     /**
      * FB Messenger API Url
      *
-     * @var string
+     * @var null|string must necessarily define in the constructor
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.8/';
+    protected $apiUrl = null;
 
     /**
      * @var null|string
@@ -44,10 +58,17 @@ class FbBotApp
     /**
      * FbBotApp constructor.
      * @param string $token
+     * @param string $version optional
      */
-    public function __construct($token)
+    public function __construct($token, $version = null)
     {
         $this->token = $token;
+        
+        if (is_null($version)) {
+            $version = $this->apiVersion
+        }
+
+        $this->apiUrl = $this->$baseApiUrl . $version . "/";
     }
 
     /**
