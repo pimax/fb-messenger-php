@@ -1,4 +1,11 @@
-## v1.1.2 (in development)
+## v1.2.1 (in development)
+
+### New features & improvements:
+
+### Bug fixes:
+
+
+## v1.2 (release date: 02th April 2019)
 
 ### New features & improvements:
 - Add user_phone_number & user_email to QuickReplyButton.php
