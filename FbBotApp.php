@@ -26,14 +26,14 @@ class FbBotApp
      *
      * @var string
      */
-    protected $baseApiUrl = 'https://graph.facebook.com/';
+    protected $baseApiUrl = "https://graph.facebook.com/";
     
     /**
      * FB Messenger API version
      *
      * @var string
      */
-    protected $apiVersion = 'v2.12'
+    protected $apiVersion = "v2.12";
 
     /**
      * FB Messenger API Url
