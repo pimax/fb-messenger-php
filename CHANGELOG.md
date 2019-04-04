@@ -8,7 +8,7 @@
 ## v1.2.1 (release date: 04th April 2019)
 
 ### Bug fixes:
-- Add missing ";" to $apiVersion declaration in class FbBotApp
+- Hotfixes in class FbBotApp
 
 
 ## v1.2 (release date: 02th April 2019)
