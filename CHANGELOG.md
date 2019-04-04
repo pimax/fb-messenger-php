@@ -1,6 +1,11 @@
-## v1.2.1 (in development)
+## v1.2.2 (in development)
 
 ### New features & improvements:
+
+### Bug fixes:
+
+
+## v1.2.1 (release date: 04th April 2019)
 
 ### Bug fixes:
 - Add missing ";" to $apiVersion declaration in class FbBotApp
@@ -11,8 +16,6 @@
 ### New features & improvements:
 - Add user_phone_number & user_email to QuickReplyButton.php
 - Add api version selection in the constructor of the class FbBotApp
-
-### Bug fixes:
 
 
 ## v1.1.1 (release date: 15th November 2018)
