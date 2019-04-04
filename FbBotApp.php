@@ -68,7 +68,7 @@ class FbBotApp
             $version = $this->apiVersion
         }
 
-        $this->apiUrl = $this->$baseApiUrl . $version . "/";
+        $this->apiUrl = $this->baseApiUrl . $version . "/";
     }
 
     /**
