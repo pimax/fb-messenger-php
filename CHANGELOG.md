@@ -1,6 +1,7 @@
 ## v1.2.2 (in development)
 
 ### New features & improvements:
+- Add appsecret_proof support
 
 ### Bug fixes:
 - Hotfixes in class FbBotApp
