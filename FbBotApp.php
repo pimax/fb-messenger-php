@@ -74,7 +74,7 @@ class FbBotApp
         }
         
         if (!is_null($app_secret)) {
-            $this->appsecret_proof= hash_hmac('sha256', $this->token, $app_secret); 
+            $this->appsecret_proof = hash_hmac('sha256', $this->token, $app_secret); 
         }
         
         $this->apiUrl = $this->baseApiUrl . $version . "/";
