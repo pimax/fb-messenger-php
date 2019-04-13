@@ -1,4 +1,10 @@
-## v1.2.2 (in development)
+## v1.2.3 (in development)
+
+### New features & improvements:
+
+### Bug fixes:
+
+## v1.2.2 (release date: 13th April 2019)
 
 ### New features & improvements:
 - Add appsecret_proof support
