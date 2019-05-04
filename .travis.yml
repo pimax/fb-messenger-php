@@ -6,3 +6,21 @@ php:
   - 7.1
   - 7.2
   - 7.3
+
+branches:
+  only:
+  - master
+  - fb-travis-ci
+
+install:
+  - travis_retry composer install --no-interaction --no-suggest
+
+script:
+  - composer test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+cache:
+  directories:
+    - $HOME/.composer/cache

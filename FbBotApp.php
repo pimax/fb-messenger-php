@@ -580,6 +580,4 @@ class FbBotApp
     {
         return $this->curl_error;
     }
-
-
 }

@@ -70,3 +70,13 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# composer
+/vendor/
+composer.phar
+
+# Project
+phpunit.phar
+.phpunit.result.cache
+phpunit.xml
+/build/
+.env

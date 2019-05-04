@@ -1,6 +1,6 @@
 {
   "name": "pimax/fb-messenger-php",
-  "description": " Facebook Messenger Bot PHP API",
+  "description": "Facebook Messenger Bot PHP API",
   "homepage": "https://github.com/pimax/fb-messenger-php",
   "license": "MIT",
   "authors": [
@@ -12,10 +12,15 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": "^7.1.3"
   },
-
+  "require-dev": {
+    "phpunit/phpunit": "^7.3"
+  },
   "autoload": {
     "psr-4": { "pimax\\": "" }
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
