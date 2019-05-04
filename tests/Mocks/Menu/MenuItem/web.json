@@ -1,0 +1,9 @@
+{
+  "type": "web_url",
+  "url": "https://github.com/pimax/fb-messenger-php/issues",
+  "title": "title",
+  "webview_height_ratio": "full",
+  "messenger_extensions": true,
+  "fallback_url": "https://github.com/pimax/fb-messenger-php",
+  "webview_share_button": "hide"
+}

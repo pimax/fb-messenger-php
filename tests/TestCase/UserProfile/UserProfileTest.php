@@ -36,6 +36,6 @@ class UserProfileTest extends AbstractTestCase
 
     public function testUserProfileData(): void
     {
-        $this->assertSame(json_decode($this->data, true), $this->userProfile->getData());
+        $this->assertJsonStringEqualsJsonString($this->data, json_encode($this->userProfile->getData()));
     }
 }

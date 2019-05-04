@@ -1,0 +1,21 @@
+{
+  "type": "nested",
+  "title": "title",
+  "call_to_actions": [
+    {
+      "type": "postback",
+      "title": "title_1",
+      "payload": "PAYLOAD_1"
+    },
+    {
+      "type": "postback",
+      "title": "title_2",
+      "payload": "PAYLOAD_2"
+    },
+    {
+      "type": "postback",
+      "title": "title_3",
+      "payload": "PAYLOAD_3"
+    }
+  ]
+}
