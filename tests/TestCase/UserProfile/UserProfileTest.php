@@ -19,9 +19,9 @@ class UserProfileTest extends AbstractTestCase
 
     public function setUp(): void
     {
-        $string = file_get_contents(__DIR__ . '/../Mocks/Response/User/user.json');
+        $this->data = file_get_contents(__DIR__ . '/../../Mocks/Response/User/user.json');
 
-        $this->userProfile = new UserProfile(json_decode($string, true));
+        $this->userProfile = new UserProfile(json_decode($this->data, true));
     }
 
     public function testGetProfile(): void
@@ -36,10 +36,6 @@ class UserProfileTest extends AbstractTestCase
 
     public function testGetProfileData(): void
     {
-        $expectedJson = file_get_contents(__DIR__ . '/../Mocks/Response/User/user.json');
-
-        $profileData = $this->userProfile->getData();
-
-        $this->assertSame(json_decode($expectedJson, true), $profileData);
+        $this->assertSame(json_decode($this->data, true), $this->userProfile->getData());
     }
 }
