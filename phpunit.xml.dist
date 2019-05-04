@@ -11,12 +11,12 @@
         stopOnFailure="false">
     <testsuites>
         <testsuite name="Test Suite">
-            <directory suffix=".php">./tests</directory>
+            <directory suffix=".php">./tests/TestCase</directory>
         </testsuite>
     </testsuites>
 
     <filter>
-        <whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./Messages</directory>
             <directory suffix=".php">./Menu</directory>
             <file>FbBotApp.php</file>
