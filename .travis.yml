@@ -9,16 +9,15 @@ php:
 
 branches:
   only:
-  - master
-  - fb-travis-ci
+    - master
+    - fb-travis-ci
 
-install:
+before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --no-suggest
+  - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-  - composer test
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - vendor/bin/phpunit
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

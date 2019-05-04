@@ -24,17 +24,17 @@ class UserProfileTest extends AbstractTestCase
         $this->userProfile = new UserProfile(json_decode($this->data, true));
     }
 
-    public function testGetProfile(): void
+    public function testUserProfile(): void
     {
-        $this->assertSame('Peter', $this->userProfile.getFirstName());
-        $this->assertSame('Chang', $this->userProfile.getLastName());
-        $this->assertSame('https://placeimg.com/200/200/nature', $this->userProfile.getProfilePic());
-        $this->assertSame('en_US', $this->userProfile.getLocale());
-        $this->assertSame(-7., $this->userProfile.getTimezone());
-        $this->assertSame('male', $this->userProfile.getGender());
+        $this->assertSame('Peter', $this->userProfile->getFirstName());
+        $this->assertSame('Chang', $this->userProfile->getLastName());
+        $this->assertSame('https://placeimg.com/200/200/nature', $this->userProfile->getPicture());
+        $this->assertSame('en_US', $this->userProfile->getLocale());
+        $this->assertSame(-7, $this->userProfile->getTimezone());
+        $this->assertSame('male', $this->userProfile->getGender());
     }
 
-    public function testGetProfileData(): void
+    public function testUserProfileData(): void
     {
         $this->assertSame(json_decode($this->data, true), $this->userProfile->getData());
     }
