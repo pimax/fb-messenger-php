@@ -28,14 +28,14 @@ class MenuItem
      *
      * @var string
      */
-    protected $type ;
+    protected $type;
 
     /**
      * Button title
      *
      * @var string
      */
-    protected $title ;
+    protected $title;
 
     /**
      * Button url
@@ -70,14 +70,14 @@ class MenuItem
      * 
      * @var null|string
      */
-    protected $webview_share_button = null ;
+    protected $webview_share_button = null;
 
     /**
      * MessageButton constructor.
      *
      * @param string $type
      * @param string $title
-     * @param string $url url or postback
+     * @param string|array $data
      */
     public function __construct($type, $title, $data, $webview_height_ratio = '', $messenger_extensions = false, $fallback_url = '', $webview_share_button =  null)
     {
