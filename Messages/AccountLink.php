@@ -8,7 +8,6 @@ namespace pimax\Messages;
  */
 class AccountLink
 {
-
   /**
    * Link Account title
    *
@@ -69,11 +68,11 @@ class AccountLink
   {
     if($this->logout)
     {
-      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_UNLINK, '');
+      $buttons = new MessageButton(MessageButton::TYPE_ACCOUNT_UNLINK, '');
     }
     else
     {
-      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_LINK, '', $this->url);
+      $buttons = new MessageButton(MessageButton::TYPE_ACCOUNT_LINK, '', $this->url);
     }
     
     $result = [
@@ -82,7 +81,7 @@ class AccountLink
       'image_url' => $this->image_url,
       'buttons' => [$buttons->getData()]
     ];
+
     return $result;
   }
-
 }
