@@ -49,8 +49,9 @@ class AccountLink
    * @param string $subtitle
    * @param string $url button url
    * @param string $image_url
+   * @param boolean $logout
    */
-  public function __construct($title, $subtitle = '', $url = '', $image_url = '', $logout = FALSE)
+  public function __construct($title, $subtitle = '', $url = '', $image_url = '', $logout = false)
   {
     $this->title = $title;
     $this->subtitle = $subtitle;

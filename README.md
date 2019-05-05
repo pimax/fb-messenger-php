@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/pimax/fb-messenger-php.svg?branch=master)](https://travis-ci.com/pimax/fb-messenger-php)
+[![Coverage badge](https://codecov.io/gh/pimax/fb-messenger-php/branch/master/graphs/badge.svg)](https://codecov.io/gh/pimax/fb-messenger-php)
+
 FB Messenger Bot PHP API
 ========================
 
