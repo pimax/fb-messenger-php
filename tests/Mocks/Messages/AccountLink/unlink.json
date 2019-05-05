@@ -1,0 +1,10 @@
+{
+  "title": "title",
+  "subtitle": "subtitle",
+  "image_url": "https://www.facebook.com/images/fb_icon_325x325.png",
+  "buttons": [
+    {
+      "type": "account_unlink"
+    }
+  ]
+}
