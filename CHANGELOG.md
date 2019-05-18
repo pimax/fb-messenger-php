@@ -1,8 +1,12 @@
 ## v1.2.3 (in development)
 
 ### New features & improvements:
+- Update required php version to 7.1.3 (https://www.php.net/supported-versions.php)
+- Add descriptions
+- Add tests
 
 ### Bug fixes:
+- Add missing ";"
 
 ## v1.2.2 (release date: 13th April 2019)
 

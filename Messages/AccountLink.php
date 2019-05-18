@@ -8,7 +8,6 @@ namespace pimax\Messages;
  */
 class AccountLink
 {
-
   /**
    * Link Account title
    *
@@ -49,8 +48,9 @@ class AccountLink
    * @param string $subtitle
    * @param string $url button url
    * @param string $image_url
+   * @param boolean $logout
    */
-  public function __construct($title, $subtitle = '', $url = '', $image_url = '', $logout = FALSE)
+  public function __construct($title, $subtitle = '', $url = '', $image_url = '', $logout = false)
   {
     $this->title = $title;
     $this->subtitle = $subtitle;
@@ -68,11 +68,11 @@ class AccountLink
   {
     if($this->logout)
     {
-      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_UNLINK, '');
+      $buttons = new MessageButton(MessageButton::TYPE_ACCOUNT_UNLINK, '');
     }
     else
     {
-      $buttons = new MessageButton( MessageButton::TYPE_ACCOUNT_LINK, '', $this->url);
+      $buttons = new MessageButton(MessageButton::TYPE_ACCOUNT_LINK, '', $this->url);
     }
     
     $result = [
@@ -81,7 +81,7 @@ class AccountLink
       'image_url' => $this->image_url,
       'buttons' => [$buttons->getData()]
     ];
+
     return $result;
   }
-
 }
