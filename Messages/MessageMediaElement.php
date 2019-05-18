@@ -8,35 +8,29 @@ namespace pimax\Messages;
  *
  * @package pimax\Messages
  */
-class MessageElement
+class MessageMediaElement
 {
     /**
-     * Title
+     * Type
      *
      * @var null|string
      */
-    protected $title = null;
+    protected $type = null;
 
     /**
      * Image url
      *
      * @var null|string
      */
-    protected $image_url = null;
-
-    /**
-     * Subtitle
-     *
-     * @var null|string
-     */
-    protected $subtitle = null;
-
-    /**
-     * Url
-     *
-     * @var null|string
-     */
     protected $url = null;
+
+    /**
+     * Attachment id
+     *
+     * @var null|string
+     */
+    protected $attachment_id = null;
+
 
     /**
      * Buttons
@@ -60,16 +54,12 @@ class MessageElement
      * @param string $image_url
      * @param array  $buttons
      */
-    public function __construct($title, $subtitle, $image_url = '', $buttons = [], $url = '', $default_action = [])
+    public function __construct($type, $url = '', $attachment_id = '', $buttons = [])
     {
-        $this->title = $title;
-        $this->subtitle = $subtitle;
+        $this->type = $type;
         $this->url = $url;
-        $this->image_url = $image_url;
+        $this->attachment_id = $attachment_id;
         $this->buttons = $buttons;
-        if (!empty($default_action)) {
-            $this->default_action = $default_action;
-        }
     }
 
     /**
@@ -80,14 +70,15 @@ class MessageElement
     public function getData()
     {
         $result = [
-            'title' => $this->title,
-            'subtitle' => $this->subtitle,
-            'item_url' => $this->url,
-            'image_url' => $this->image_url,
+            'type' => $this->type,
         ];
-        
-        if (!empty($this->default_action)) {
-            $result['default_action'] = $this->default_action;
+
+        if (!empty($this->url)) {
+            $result['url'] = $this->url;
+        }
+
+        if (!empty($this->attachment_id)) {
+            $result['attachment_id'] = $this->attachment_id;
         }
 
         if (!empty($this->buttons)) {

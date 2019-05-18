@@ -29,14 +29,20 @@ class Attachment
     private $fileData;
 
     /**
+     * @var array
+     */
+    private $quick_replies = array();
+
+    /**
      * Attachment constructor.
      * @param string $type
      * @param array  $payload
      */
-    public function __construct($type, $payload = array())
+    public function __construct($type, $payload = array(), $quick_replies = array())
     {
         $this->type = $type;
         $this->payload = $payload;
+        $this->quick_replies = $quick_replies;
     }
 
     /**
@@ -98,6 +104,11 @@ class Attachment
                 'payload' => $this->payload
             ]
         ];
+
+        foreach ($this->quick_replies as $qr) {
+            $data['quick_replies'][] = $qr->getData();
+        }
+
         if (!empty($this->fileData)) {
             $data['filedata'] = $this->fileData;
         }
