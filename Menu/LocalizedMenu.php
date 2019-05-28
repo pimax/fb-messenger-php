@@ -8,13 +8,19 @@ namespace pimax\Menu;
  */
 class LocalizedMenu
 {
+    private $locale;
 
-    private $locale ;
-
-    private $composer_input_disabled ;
+    private $composer_input_disabled;
 
     private $menuItems;
 
+    /**
+     * LocalizedMenu constructor.
+     *
+     * @param string $locale
+     * @param boolean $composer_input_disabled
+     * @param null|array $menuItems
+     */
     public function __construct($locale, $composer_input_disabled, $menuItems = null) {
         
         $this->locale = $locale;
