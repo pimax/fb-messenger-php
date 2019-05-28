@@ -70,5 +70,17 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
 # Token for Graph API provided for testing
 testdata.json
+
+# composer
+/vendor/
+composer.phar
+
+# Project
+phpunit.phar
+.phpunit.result.cache
+phpunit.xml
+/build/
+.env

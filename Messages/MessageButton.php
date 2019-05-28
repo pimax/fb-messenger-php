@@ -140,45 +140,44 @@ class MessageButton
             case self::TYPE_POSTBACK:
                 $result['title'] = $this->title;
                 $result['payload'] = $this->url;
-            break;
+                break;
 
             case self::TYPE_CALL:
                 $result['title'] = $this->title;
                 $result['payload'] = $this->url;
-            break;
+                break;
 
             case self::TYPE_WEB:
-              $result['title'] = $this->title;
-              $result['url'] = $this->url;
+                $result['title'] = $this->title;
+                $result['url'] = $this->url;
 
-              if ($this->webview_height_ratio) {
-                  $result['webview_height_ratio'] = $this->webview_height_ratio;
-              }
+                if ($this->webview_height_ratio) {
+                    $result['webview_height_ratio'] = $this->webview_height_ratio;
+                }
 
-              if ($this->messenger_extensions){
-                  $result['messenger_extensions'] = $this->messenger_extensions;
-                  $result['fallback_url'] = $this->fallback_url;
-              }
-              
-              if($this->webview_share_button){
-                  $result['webview_share_button'] = $this->webview_share_button ;
-              }
-            break;
+                if ($this->messenger_extensions){
+                    $result['messenger_extensions'] = $this->messenger_extensions;
+                    $result['fallback_url'] = $this->fallback_url;
+                }
+
+                if($this->webview_share_button){
+                    $result['webview_share_button'] = $this->webview_share_button;
+                }
+                break;
 
             case self::TYPE_SHARE:
-              //only share_contents needed
-               if ($this->share_contents)
-                $result['share_contents'] = $this->share_contents->getData();
-            break;
+                //only share_contents needed
+                if ($this->share_contents)
+                    $result['share_contents'] = $this->share_contents->getData();
+                break;
 
             case self::TYPE_ACCOUNT_LINK:
                 $result['url'] = $this->url;
-            break;
+                break;
 
             case self::TYPE_ACCOUNT_UNLINK:
-              //only type needed
-            break;
-
+                //only type needed
+                break;
         }
 
         return $result;

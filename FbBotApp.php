@@ -24,19 +24,37 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
+    
+    /**
+     * FB Messenger base API Url
+     *
+     * @var string
+     */
+    protected $baseApiUrl = "https://graph.facebook.com/";
+    
+    /**
+     * FB Messenger API version
+     *
+     * @var string
+     */
+    protected $apiVersion = "v2.12";
 
     /**
      * FB Messenger API Url
      *
-     * @var string
+     * @var null|string must necessarily define in the constructor
      */
-    protected $apiUrl = 'https://graph.facebook.com/v2.8/';
+    protected $apiUrl = null;
 
     /**
      * @var null|string
      */
     protected $token = null;
 
+    /**
+     * @var null|string
+     */
+    protected $appsecret_proof = null;
 
     /**
      * Contains the last cURL error for the current session if encountered
@@ -48,10 +66,22 @@ class FbBotApp
     /**
      * FbBotApp constructor.
      * @param string $token
+     * @param string $version optional
+     * @param string $app_secret optional
      */
-    public function __construct($token)
+    public function __construct($token, $version = null, $app_secret=null)
     {
         $this->token = $token;
+        
+        if (is_null($version)) {
+            $version = $this->apiVersion;
+        }
+        
+        if (!is_null($app_secret)) {
+            $this->appsecret_proof = hash_hmac('sha256', $this->token, $app_secret); 
+        }
+        
+        $this->apiUrl = $this->baseApiUrl . $version . "/";
     }
 
 
@@ -504,6 +534,10 @@ class FbBotApp
     {
         $data['access_token'] = $this->token;
 
+        if (!is_null($this->appsecret_proof)){
+            $data['appsecret_proof'] = $this->appsecret_proof;
+        }
+        
         $headers = [
             'Content-Type: application/json',
         ];
@@ -553,6 +587,4 @@ class FbBotApp
     {
         return $this->curl_error;
     }
-
-
 }

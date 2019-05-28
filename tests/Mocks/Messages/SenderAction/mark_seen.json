@@ -1,0 +1,6 @@
+{
+    "recipient": {
+        "id": "1234567890"
+    },
+    "sender_action": "mark_seen"
+}
