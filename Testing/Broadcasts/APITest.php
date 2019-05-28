@@ -105,6 +105,16 @@ class APITest extends DefaultTest
         self::$label = NULL;
     }
 
+    public function testUnbindWorksIfNotExists() {
+        $label2 = self::makeBotApp() -> createLabel('TEST_LABEL_X');
+        $response = self::makeBotApp() -> unbindLabel($label2['id'], self::getPSID());
+
+        self::assertNotEmpty($response['success']);
+        self::assertTrue($response['success']);
+
+        self::makeBotApp() -> deleteLabel($label2['id']);
+    }
+
     public function testGetLabelsByPSIDReturnsCorrectLabels() {
         $label = self::getTestLabel();
         $lID = $label['id'];
