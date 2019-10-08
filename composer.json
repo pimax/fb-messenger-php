@@ -1,7 +1,7 @@
 {
-  "name": "pimax/fb-messenger-php",
+  "name": "arsengoian/fb-messenger-php",
   "description": "Facebook Messenger Bot PHP API",
-  "homepage": "https://github.com/pimax/fb-messenger-php",
+  "homepage": "https://github.com/arsengoian/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
@@ -9,6 +9,12 @@
       "email": "m.pinyugin@gmail.com",
       "homepage": "http://russian-developers.com",
       "role": "Developer"
+    },
+    {
+      "name": "Arsen Goian",
+      "email": "arsengoian@gmail.com",
+      "homepage": "http://wedo.in.ua",
+      "role": "CEO"
     }
   ],
   "require": {
