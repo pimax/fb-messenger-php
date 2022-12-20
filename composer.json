@@ -18,7 +18,31 @@
     "phpunit/phpunit": "^7.3"
   },
   "autoload": {
-    "psr-4": { "pimax\\": "" }
+    "files": [
+      "FbBotApp.php",
+      "UserProfile.php",
+      "Menu/LocalizedMenu.php",
+      "Menu/MenuItem.php",
+      "Messages/AccountLink.php",
+      "Messages/Address.php",
+      "Messages/Adjustment.php",
+      "Messages/Attachment.php",
+      "Messages/AudioMessage.php",
+      "Messages/FileMessage.php",
+      "Messages/ImageMessage.php",
+      "Messages/Message.php",
+      "Messages/MessageButton.php",
+      "Messages/MessageDefaultAction.php",
+      "Messages/MessageElement.php",
+      "Messages/MessageMediaElement.php",
+      "Messages/MessageReceiptElement.php",
+      "Messages/QuickReply.php",
+      "Messages/QuickReplyButton.php",
+      "Messages/SenderAction.php",
+      "Messages/StructuredMessage.php",
+      "Messages/Summary.php",
+      "Messages/VideoMessage.php"
+    ]
   },
   "scripts": {
     "test": "phpunit"
