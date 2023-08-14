@@ -1,13 +1,13 @@
 {
-  "name": "alefinvest/fb-messenger-php",
+  "name": "pimax/fb-messenger-php",
   "description": "Facebook Messenger Bot PHP API",
   "homepage": "https://github.com/pimax/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
-      "name": "Oleksii Bondarenko",
-      "email": "alex.mazaltov@gmail.com",
-      "homepage": "https://github.alefinvest.xyz",
+      "name": "Maksim Piniugin",
+      "email": "m.pinyugin@gmail.com",
+      "homepage": "https://maxpinyugin.com",
       "role": "Developer"
     }
   ],
