@@ -3,6 +3,7 @@
 namespace pimax;
 
 use pimax\Messages\Message;
+use pimax\Messages\SenderAction;
 
 class FbBotApp
 {
@@ -83,7 +84,7 @@ class FbBotApp
     /**
      * Send Message
      *
-     * @param Message $message
+     * @param Message|SenderAction $message
      * @return array
      */
      public function send($message)
