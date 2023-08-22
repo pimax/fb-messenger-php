@@ -70,6 +70,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+# Token for Graph API provided for testing
+testdata.json
+
 # composer
 /vendor/
 composer.phar

@@ -2,10 +2,14 @@
 
 namespace pimax;
 
+use pimax\Broadcasts\Broadcasts;
 use pimax\Messages\Message;
 
 class FbBotApp
 {
+
+    use Broadcasts;
+
     /**
      * Request type GET
      */
@@ -79,6 +83,7 @@ class FbBotApp
         
         $this->apiUrl = $this->baseApiUrl . $version . "/";
     }
+
 
     /**
      * Send Message
@@ -513,6 +518,8 @@ class FbBotApp
             'metric' => $metric
         ], self::TYPE_GET);
     }
+
+
 
     /**
      * Request to API
