@@ -98,7 +98,6 @@ class Message
         $this->tag = $tag;
         $this->notification_type = $notification_type;
         $this->messaging_type = $messaging_type;
-        $this->messaging_type = $messaging_type;
     }
 
     public function setTag($tag) {
